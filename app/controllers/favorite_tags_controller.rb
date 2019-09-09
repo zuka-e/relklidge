@@ -1,0 +1,2 @@
+class FavoriteTagsController < ApplicationController
+end
