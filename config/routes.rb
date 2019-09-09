@@ -1,4 +1,31 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'tags/index'
+  end
+  namespace :admin do
+    get 'sections/index'
+    get 'sections/show'
+  end
+  namespace :admin do
+    get 'categories/index'
+    get 'categories/new'
+    get 'categories/edit'
+  end
+  namespace :admin do
+    get 'comments/index'
+  end
+  namespace :admin do
+    get 'posts/index'
+    get 'posts/show'
+    get 'posts/new'
+  end
+  namespace :admin do
+    get 'users/index'
+    get 'users/show'
+  end
+  namespace :admin do
+    get 'sessions/new'
+  end
   get 'tags/index'
   get 'sections/index'
   get 'sections/show'
