@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
   resources :users, only: [:new, :create, :show, :edit, :update]
-  get '/users/:id/myposts', to: 'users#myposts'
-  get '/users/:id/withdrawal', to: 'users#withdrawal'
-  patch '/users/:id/withdrawal', to: 'users#quit'
+  get '/users/:id/myposts', to: 'users#myposts', as: 'myposts'
+  get '/users/:id/withdrawal', to: 'users#withdrawal', as: 'withdrawal'
+  patch '/users/:id/withdrawal', to: 'users#quit', as: 'quit'
   resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
     resources :comments, only: [:create, :update, :destroy]
   end
