@@ -1,45 +1,47 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    get 'tags/index'
+
+  root                'static_pages#home'
+  get    'help'    => 'static_pages#help'
+  get    'about'   => 'static_pages#about'
+  get    'contact' => 'static_pages#contact'
+  get    'signup'  => 'users#new'
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
+  resources :users, only: [:new, :create, :show, :edit, :update]
+  get '/users/:id/myposts', to: 'users#myposts'
+  get '/users/:id/withdrawal', to: 'users#withdrawal'
+  patch '/users/:id/withdrawal', to: 'users#quit'
+  resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :comments, only: [:create, :update, :destroy]
   end
-  namespace :admin do
-    get 'sections/index'
-    get 'sections/show'
+  resources :likes, only: [:create, :destroy]
+  resources :categories, only: [:index] do
+    resources :sections, only: [:index, :show]
   end
+  resources :tags, only: [:index, :create, :update]
+  resources :favorite_tags, only: [:create, :destroy]
+  resources :post_tags, only: [:create, :destroy]
+  resources :item_tags, only: [:create, :destroy]
+
   namespace :admin do
-    get 'categories/index'
-    get 'categories/new'
-    get 'categories/edit'
+    get    'login'   => 'sessions#new'
+    post   'login'   => 'sessions#create'
+    delete 'logout'  => 'sessions#destroy'
+    resources :users, only: [:index, :show]
+    patch '/users/:id/withdrawal', to: 'users#quit'
+    resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
+      resources :comments, only: [:index, :create, :update, :destroy]
+    end
+    resources :categories, only: [:index, :new, :create, :edit, :update, :destroy] do
+      resources :sections, only: [:index, :create, :show, :update, :destroy]
+    end
+    resources :items, only: [:create, :update, :destroy]
+    resources :tags, only: [:index, :create, :update, :destroy]
+    resources :post_tags, only: [:create, :destroy]
+    resources :item_tags, only: [:create, :destroy]
   end
-  namespace :admin do
-    get 'comments/index'
-  end
-  namespace :admin do
-    get 'posts/index'
-    get 'posts/show'
-    get 'posts/new'
-  end
-  namespace :admin do
-    get 'users/index'
-    get 'users/show'
-  end
-  namespace :admin do
-    get 'sessions/new'
-  end
-  get 'tags/index'
-  get 'sections/index'
-  get 'sections/show'
-  get 'categories/index'
-  get 'posts/index'
-  get 'posts/new'
-  get 'posts/show'
-  get 'users/new'
-  get 'users/show'
-  get 'users/edit'
-  get 'users/withdrawal'
-  get 'sessions/new'
-  get 'static_pages/home'
-  get 'static_pages/about'
-  get 'static_pages/help'
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
