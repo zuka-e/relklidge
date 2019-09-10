@@ -1,2 +1,23 @@
-<h1>StaticPages#about</h1>
-<p>Find me in app/views/static_pages/about.html.erb</p>
+<% provide(:title, 'about') %>
+<div class="basic-page row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Relklidgeへようこそ</h1>
+      <p class="alert alert-info">当サイトご利用前に、以下をご確認ください。</p>
+      <section>
+        <h2>Relklidgeとは</h2>
+          <p>憲法や民法等、興味関心のある専門分野に関する解説文、論文の投稿ができるまとめサイトです。</p>
+          <p>他の利用者の投稿を閲覧し、それに対しいいね(お気に入り登録)、また、コメントを書くことができます。</p>
+          <p>サイトの閲覧は登録不要でご利用いただけます。解説文の投稿、また、他の利用者の投稿にいいね、コメントをする際には登録が必要となります。</p>
+        <h2>免責について</h2>
+          <p>当サイトは、利用者がコンテンツの利用により、利用者または第三者に損害が発生した場合にも、一切責任を負いません。</p>
+          <p>当サイトは、コンテンツにより提供されている情報の正確性、有用性等については一切責任を負いません。</p>
+        <h2>コンテンツについて</h2>
+          <p>利用者の投稿及びコメントについて、当サイトが不適切と判断した場合、利用者への通知なく、変更、削除等が行われることがあります。</p>
+          <p>コンテンツは、利用者に予告することなく変更、削除等が行われることがあります。</p>
+      </section>
+      <div class="select-actions">
+        <%= link_to "登録", signup_path, class:"btn btn-success lef-btn" %>
+        <%= link_to "ログイン", login_path, class:"btn btn-info right-btn" %>
+      </div>
+  </div>
+</div>

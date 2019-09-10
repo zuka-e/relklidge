@@ -1,12 +1,18 @@
 
 <footer class="footer">
-  <small>
-    <%= link_to 'Relklidge',root_path %>
-  </small>
-  <nav>
-    <ul>
-      <li><%= link_to "About",   about_path %></li>
-      <li><%= link_to "help", help_path %></li>
-    </ul>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-footer">
+        <small style="text-align:center;">
+          <%= link_to 'Relklidge', root_path, id:"logo" %>
+        </small>
+      </div>
+      <div class="collapse navbar-collapse" id="navbarEexample7">
+        <ul class="nav navbar-nav navbar-right">
+          <li><%= link_to "About",about_path, class: "glyphicon glyphicon-info-sign" %></li>
+          <li><%= link_to "Help", help_path, class: "glyphicon glyphicon-question-sign" %></li>
+        </ul>
+      </div>
+    </div>
   </nav>
 </footer>
