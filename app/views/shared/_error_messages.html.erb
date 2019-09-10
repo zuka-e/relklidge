@@ -1,0 +1,13 @@
+<!--<%= render 'shared/error_messages', object: f.object %>-->
+<% if object.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= object.errors.count %>つのエラーが存在します。
+    </div>
+    <ul>
+    <% object.errors.each do |attribute, value| %>
+      <li><%= value %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
