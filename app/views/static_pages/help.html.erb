@@ -1,2 +1,12 @@
-<h1>StaticPages#help</h1>
-<p>Find me in app/views/static_pages/help.html.erb</p>
+<% provide(:title, 'help') %>
+<div class="basic-page row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>よくある質問</h1>
+      <section>
+        <h2>会員登録は必要ですか</h2>
+          <p>サイトの閲覧は登録不要でご利用いただけます。解説文の投稿、また、他の利用者の投稿にいいね、コメントをする際には登録が必要となります。</p>
+        <h2>退会はできますか</h2>
+          <p><%= link_to 'こちらのページ', withdrawal_path(1)%>から退会することができます。</p>
+      </section>
+  </div>
+</div>

@@ -18,9 +18,12 @@
 
 .basic-page {
   margin-top: 50px;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
   h1 {
-    padding-bottom: 30px;
+    border-bottom: 1px solid;
+    border-left: 7px solid;
+    padding-left: 15px;
+    padding-bottom: 20px;
   }
   h2 {
     padding-top: 30px;
