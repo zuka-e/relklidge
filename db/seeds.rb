@@ -14,10 +14,6 @@ Admin.create!( name: "管理者",
   password_confirmation: 'password'
 )
 
-# タグを生成
-tags = %w[家庭裁判所 制限行為能力者 善意の第三者 催告 錯誤 強迫 詐欺 保存行為 代理人 取消し 無効 追認 破産 差押え 占有の訴え]
-tags.each { |w| Tag.create!(name: w) }
-
 # カテゴリを生成
 categories = %w[憲法 民法]
 categories.each { |w| Category.create!(name: w, content: "") }
@@ -60,6 +56,15 @@ User.all.each do |user|
   writing_time: "",
   is_open: ""
 )
+end
+
+# タグを生成
+tags = %w[家庭裁判所 制限行為能力者 善意の第三者 催告 錯誤 強迫 詐欺 保存行為 代理人 取消し 無効 追認 破産 差押え 占有の訴え]
+tags.each { |w| Tag.create!(name: w) }
+
+# 投稿タグを生成
+Post.all.each do |post|
+  post.tags << Tag.find(post.id)
 end
 
 # コメントを生成
