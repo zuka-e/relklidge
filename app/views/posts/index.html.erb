@@ -1,15 +1,18 @@
 <% provide(:title, "posts")%>
 <div class="basic-page index row">
-  <div class="col-md-12">
+  <div class="col-md-8 col-md-offset-2">
     <% @posts.each do |post| %>
       <div class="list-group">
-        <%= link_to '#',class: "list-group-item" do %>
-          <h3 class="list-group-item-heading"><%= "#{post.user.name}  #{post.title}" %></h3>
-          <span class="list-group-item-text"><%= "#{post.created_at.strftime('%Y/%m/%d %H:%M')}__"%>
-            <span class="glyphicon glyphicon-thumbs-up"><%= "#{post.likes.count}" %></span>
-            <span class="glyphicon glyphicon-comment"><%= "#{post.comments.count}" %></span>
+        <%= link_to post_path(post), class: "list-group-item" do %>
+          <h3 class="list-group-item-heading">
+            <%= attachment_image_tag post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
+            <%= "#{ post.title }" %>
+          </h3>
+          <span class="list-group-item-text"><%= "#{ post.created_at.strftime('%Y/%m/%d %H:%M') }___"%>
+            <span class="glyphicon glyphicon-thumbs-up"><%= "#{ post.likes.count }" %></span>
+            <span class="glyphicon glyphicon-comment"><%= "#{ post.comments.count }" %></span>
           </span>
-          <p class="list-group-item-text"><%= post.content %></p>
+          <p class="list-group-item-text"><%= "#{ post.content[0..140] }..." %></p>
         <% end %>
       </div>
     <% end %>
