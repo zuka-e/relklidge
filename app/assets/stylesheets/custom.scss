@@ -24,6 +24,7 @@
     border-left: 7px solid;
     padding-left: 15px;
     padding-bottom: 20px;
+    margin-bottom: 40px;
   }
   h2 {
     padding-top: 30px;
@@ -65,4 +66,18 @@
 
 .navbar-footer {
   text-align: center;
+}
+
+// 退会ページ
+.alert-form {
+  ul {
+    margin-top: 40px;
+  }
+  ul li {
+    text-align: left;
+    margin-bottom: 10px;
+  }
+  span {
+    color: red;
+  }
 }

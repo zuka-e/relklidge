@@ -1,2 +1,22 @@
-<h1>Users#withdrawal</h1>
-<p>Find me in app/views/users/withdrawal.html.erb</p>
+<% provide(:title, 'withdrawal') %>
+<div class="basic-page row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="alert-form">
+      <h1>退会に関して</h1>
+      <p class="alert alert-danger"><strong>退会前に、以下注意事項を必ずご確認ください。</strong></p>
+      <h2>退会時の注意点</h2>
+      <ul>
+        <li>退会処理を実行すると、今までに投稿した記事などが<span>全て削除されます。</span></li>
+        <li>退会後はマイページが閲覧できなくなり、<span>過去の情報を確認することはできません。</span></li>
+        <li>再度会員登録いただいても、<span>前回入会時の情報は参照できません。</span></li>
+        <li>上記の注意事項に同意される場合のみ退会するボタンを押してください。</li>
+      </ul>
+
+      <div class="select-actions">
+        <%= link_to "退会する", quit_path(@user),
+        method: :patch, data: { confirm: "本当に退会しますか？" }, class:"btn btn-danger" %>
+        <%= link_to "戻る", user_path(@user), class:"btn btn-info" %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,16 @@ class UsersController < ApplicationController
   def withdrawal
     @user = User.find(params[:id])
   end
+  def quit
+    @user = User.find(params[:id])
+    @user.is_quit = true
+    if @user.save
+      flash[:warning] = "退会処理が正常に完了しました"
+      redirect_to root_path
+    end
+  end
+
+
   private
 
   def user_params
