@@ -1,2 +1,21 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<% provide(:title, "posts")%>
+<div class="basic-page index row">
+  <div class="col-md-12">
+    <% @posts.each do |post| %>
+      <div class="list-group">
+        <%= link_to '#',class: "list-group-item" do %>
+          <h3 class="list-group-item-heading"><%= "#{post.user.name}  #{post.title}" %></h3>
+          <span class="list-group-item-text"><%= "#{post.created_at.strftime('%Y/%m/%d %H:%M')}__"%>
+            <span class="glyphicon glyphicon-thumbs-up"><%= "#{post.likes.count}" %></span>
+            <span class="glyphicon glyphicon-comment"><%= "#{post.comments.count}" %></span>
+          </span>
+          <p class="list-group-item-text"><%= post.content %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @posts, class: "paginate" %>
+    </div>
+  </div>
+</div>
+
