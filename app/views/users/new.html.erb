@@ -1,2 +1,38 @@
-<h1>Users#new</h1>
-<p>Find me in app/views/users/new.html.erb</p>
+<% provide(:title, 'signup') %>
+<div class="basic-page row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1>新規アカウント登録</h1>
+    <%= form_for @user do |f| %>
+      <p class="alert alert-info">空欄を全てご記入の上、登録ボタンを押してください。</p>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-box">
+
+        <div class="field">
+          <%= f.label :name, "登録名" %>
+          <%= f.text_field :name, autofocus: true, autocomplete: "name",
+          placeholder: '登録名:', class: 'form-control'%>
+        </div>
+        <div class="field">
+          <%= f.label :email, "メールアドレス" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email",
+          placeholder: 'メールアドレス:', class: 'form-control'%>
+        </div>
+
+        <div class="field">
+          <%= f.label :password, "パスワード" %>
+          <%= f.password_field :password, autocomplete: "current-password",
+          placeholder: '8文字以上', class: 'form-control' %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation, "パスワード確認用" %>
+          <%= f.password_field :password_confirmation, autocomplete: "current-password",
+          placeholder: '上記と同じパスワード', class: 'form-control' %>
+        </div>
+        <div class="actions">
+          <%= f.submit "登録", data: { confirm: 'この情報で登録します' }, class:"btn btn-success btn-block only-btn" %>
+        </div>
+
+      </div>
+    <% end %>
+  </div>
+</div>

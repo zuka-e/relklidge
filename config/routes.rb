@@ -25,11 +25,12 @@ Rails.application.routes.draw do
   resources :item_tags, only: [:create, :destroy]
 
   namespace :admin do
+    root                'sessions#home'
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
     resources :users, only: [:index, :show]
-    patch '/users/:id/withdrawal', to: 'users#quit'
+    patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
     resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
       resources :comments, only: [:index, :create, :update, :destroy]
     end
