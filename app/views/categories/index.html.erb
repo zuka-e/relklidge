@@ -4,8 +4,7 @@
     <% @categories.each do |category| %>
       <div class="category-item">
         <%= link_to category_path(category.id) do %>
-          <img src="constitution.jpg" alt="constitution" width="300px">
-          <%#= attachment_image_tag category, :image, :fill, 300, 300, format: 'jpg', fallback: "/no_image.jpg", size:'300x300'%>
+          <%= attachment_image_tag category, :image, :fill, 300, 250, format: 'jpg', fallback: "/no_image.jpg", size:'300x250'%>
           <h2><%= category.name %></h2>
         <% end %>
       </div>

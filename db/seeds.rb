@@ -15,8 +15,8 @@ Admin.create!( name: "管理者",
 )
 
 # カテゴリを生成
-categories = %w[憲法 民法]
-categories.each { |w| Category.create!(name: w, content: "") }
+categories = [["憲法","6b479db3c59fb4aaf88f81215b5e303d9d410457d0d112e9d376b5ed27b5"],["民法","0fe69738129f0875194c7f4e482c04e809581fde783f962bfb123c0b3947"]]
+categories.each { |w| Category.create!(name: w[0], content: "", image_id: w[1]) }
 
 # 区分を生成
 sections1 = %w[基本的人権 平和主義 国民主権]
