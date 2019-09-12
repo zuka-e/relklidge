@@ -3,7 +3,7 @@
 	<div class="col-md-8 col-md-offset-2 clearfix">
     <% @tags.each do |tag| %>
       <%= link_to posts_path( tag: tag.name ), class:"tag-index" do %>
-        <span class="char-aria">
+        <span class="char-area">
           <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
         </span>
       <% end %>

@@ -6,7 +6,9 @@ class PostsController < ApplicationController
       @posts = Post.page(params[:page])
     end
     @categories = Category.all
-    @sections = Section.all
+    # group 重複まとめ, Arel.sql() 対injection, count() postの多い順(order用), pluck post_idのみ出力
+    ranked_tag_id = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
+    @tags = Tag.find(ranked_tag_id)
   end
 
   def new
