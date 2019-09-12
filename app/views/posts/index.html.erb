@@ -1,6 +1,9 @@
 <% provide(:title, "posts")%>
-<div class="basic-page index row">
-  <div class="col-md-8 col-md-offset-2">
+<div class="basic-page row">
+  <aside>
+    <%= render 'shared/side_bar' %>
+  </aside>
+  <div class="col-md-9 index">
     <% @posts.each do |post| %>
       <div class="list-group">
         <%= link_to post_path(post), class: "list-group-item" do %>

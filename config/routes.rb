@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'items/show'
   root                'static_pages#home'
   get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'
@@ -17,7 +18,9 @@ Rails.application.routes.draw do
   end
   resources :likes, only: [:create, :destroy]
   resources :categories, only: [:index] do
-    resources :sections, only: [:index, :show]
+    resources :sections, only: [] do
+      resources :items, only: [:show]
+    end
   end
   resources :tags, only: [:index, :create, :update]
   resources :favorite_tags, only: [:create, :destroy]
