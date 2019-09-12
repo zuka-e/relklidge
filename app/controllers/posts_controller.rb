@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.page(params[:page])
+    if params[:tag].present?
+      @posts = Post.joins(:tags).where("tags.name = ?", params[:tag]).page(params[:page])
+    else
+      @posts = Post.page(params[:page])
+    end
     @categories = Category.all
     @sections = Section.all
   end

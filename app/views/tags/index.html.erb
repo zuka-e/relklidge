@@ -1,2 +1,12 @@
-<h1>Tags#index</h1>
-<p>Find me in app/views/tags/index.html.erb</p>
+<% provide(:title, "タグ")%>
+<div class="row basic-page">
+	<div class="col-md-8 col-md-offset-2 clearfix">
+    <% @tags.each do |tag| %>
+      <%= link_to posts_path( tag: tag.name ), class:"tag-index" do %>
+        <span class="char-aria">
+          <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

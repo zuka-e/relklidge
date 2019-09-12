@@ -120,3 +120,18 @@ li.list-group-item.middle-item:first-child {
     float: right;
   }
 }
+
+// タグ一覧
+.tag-index {
+  display: inline-block;
+  width: 24%;
+  margin-bottom: 30px;
+  font-size: 1.5em;
+  .char-aria {
+    background: cornsilk;
+  }
+  .badge {
+    margin-left: 3%;
+    background: sandybrown;
+  }
+}
