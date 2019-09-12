@@ -1,2 +1,15 @@
-<h1>Categories#index</h1>
-<p>Find me in app/views/categories/index.html.erb</p>
+<% provide(:title, "カテゴリー")%>
+<div class="row basic-page">
+	<div class="col-md-8 col-md-offset-2 categories clearfix">
+    <% @categories.each do |category| %>
+      <div class="category-item">
+        <%= link_to category_path(category.id) do %>
+          <img src="constitution.jpg" alt="constitution" width="300px">
+          <%#= attachment_image_tag category, :image, :fill, 300, 300, format: 'jpg', fallback: "/no_image.jpg", size:'300x300'%>
+          <h2><%= category.name %></h2>
+        <% end %>
+      </div>
+    <% end %>
+    </div>
+	</div>
+</div>

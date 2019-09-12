@@ -104,3 +104,19 @@ li.list-group-item.middle-item:first-child {
 .index .list-group:last-child .list-group-item {
   border-bottom: 1px solid #ddd;
 }
+
+// カテゴリー一覧
+.category-item {
+  width: 40%;
+  margin-bottom: 30px;
+  h2 {
+    text-align: center;
+    padding-top: 0px;
+  }
+  &:nth-child(odd) {
+    float: left;
+  }
+  &:nth-child(even) {
+    float: right;
+  }
+}
