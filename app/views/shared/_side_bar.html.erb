@@ -1,13 +1,13 @@
 <div class="col-md-3 side-bar">
-  <% @sections.each do |section| %>
-    <ul class="list-group">
+  <ul class="list-group">
+    <% @sections.each do |section| %>
       <li class="list-group-item"><%= section.name %></li>
-        <ul class="list-group">
-          <% section.items.each do |item| %>
-            <li class="list-group-item middle-item">
-              <%= link_to item.name, category_section_item_path(section.category.id,section.id,item.id) %></li>
-          <% end %>
-        </ul>
-    </ul>
-  <% end %>
+      <% section.items.each do |item| %>
+        <li class="list-group-item middle-item under-section">
+          <%= link_to item.name, category_section_item_path(section.category.id,section.id,item.id) %>
+        </li>
+      <% end %>
+    <% end %>
+    <li class="list-group-item last-item"></li>
+  </ul>
 </div>
