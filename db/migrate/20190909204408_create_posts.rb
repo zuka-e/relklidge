@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :title, null: false
       t.text :content, null: false
       t.integer :writing_time, default: 0
-      t.string :is_open, default: false
+      t.boolean :is_open, default: false
 
       t.timestamps
     end

@@ -46,23 +46,24 @@ names = %w[Amy Bob Cyan Dim Eif Fena Gon Hon Ion John]
 names.each do |w|
   email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@test.com"
   password = "password"
-  # is_quit = [false, true]
+  is_quit = [false, true]
   User.create!( name: w,
     image_id: "",
     email: email,
     password: password,
     password_confirmation: password,
-    is_quit: ""
+    is_quit: is_quit.sample
     )
 end
 
 # 投稿を生成
+Post.create!( user_id: 1, title: "True", content: "True", is_open: true )
 User.all.each do |user|
   Post.create!( user_id: user.id,
   title: "title-#{user.id}",
   content: "post_content-#{user.id}" * 50,
-  writing_time: "",
-  is_open: ""
+  writing_time: 0,
+  is_open: false
 )
 end
 
