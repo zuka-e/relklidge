@@ -12,8 +12,39 @@ class PostsController < ApplicationController
   end
 
   def new
+    @post = Post.new
+    @post_tags_ids = PostTag.where("post_id = ?", @post.id).pluck(:tag_id)
+    @tag = Tag.new
+  end
+  def create
+    @post = Post.new(post_params)
+    @post.user = current_user
+    @post.is_open = true if params[:is_open]
+    if params[:new_tag] && params[:tag][:name].present?
+      tag = Tag.create(tag_params)
+			@post.tags << tag
+    end
+    if @post.save
+      @post.tags << Tag.find(params[:tags])
+      flash[:success] = '投稿が作成されました'
+      redirect_to @post
+    else
+      flash.now[:danger] = '保存されていません'
+      render 'new'
+    end
   end
 
   def show
+    @post = Post.find(params[:id])
   end
+
+  private
+
+    def post_params
+      params.require(:post).permit(:title, :content, :writing_time)
+    end
+    def tag_params
+			params.require(:tag).permit(:name)
+		end
+
 end

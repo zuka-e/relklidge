@@ -21,8 +21,12 @@ categories.each { |w| Category.create!(name: w[0], content: "", image_id: w[1]) 
 # 区分を生成
 sections1 = %w[基本的人権 平和主義 国民主権]
 sections2 = %w[総則 物権 債権 相続]
-sections1.each { |w| Section.create!(category_id: 1, name: w) }
-sections2.each { |w| Section.create!(category_id: 2, name: w) }
+sections = [sections1, sections2]
+i = 0
+categories.count.times do |index|
+  sections[i].each { |w| Section.create!(category_id: i + 1, name: w) }
+  i += 1
+end
 
 # 項目を生成
 items1_1 = %w[生存権 社会権 参政権]
@@ -32,13 +36,14 @@ items2_1 = %w[権利能力 法人 制限行為能力者]
 items2_2 = %w[不動産と動産 取得時効 抵当権]
 items2_3 = %w[保証債務 連帯債務 弁済]
 items2_4 = %w[婚姻 養子 相続]
-items1_1.each { |w| Item.create!(section_id: 1, name: w) }
-items1_2.each { |w| Item.create!(section_id: 2, name: w) }
-items1_3.each { |w| Item.create!(section_id: 3, name: w) }
-items2_1.each { |w| Item.create!(section_id: 4, name: w) }
-items2_2.each { |w| Item.create!(section_id: 5, name: w) }
-items2_3.each { |w| Item.create!(section_id: 6, name: w) }
-items2_4.each { |w| Item.create!(section_id: 7, name: w) }
+items = [items1_1, items1_2, items1_3, items2_1 ,items2_2, items2_3, items2_4]
+i = 0
+categories.count.times do |index|
+  sections[index].count.times do
+    items[i].each { |w| Item.create!(section_id: i + 1, name: w) }
+    i += 1
+  end
+end
 
 # ユーザを生成
 User.create!( name: 'name', email: 'user@test.jp', password: 'password', password_confirmation: 'password')
