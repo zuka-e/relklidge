@@ -35,20 +35,14 @@
         </div>
       </section>
       <div class="comments">
-        <div id="new-comments">
+        <div id="new-comment">
           <%= render partial: 'comments/comments' %>
         </div>
-      <%= form_for(@comment, url: user_post_comments_path(current_user.id, @post.id), remote: true) do |f| %>
-        <%= hidden_field_tag "stored_url", request.url %>
-        <%= render 'shared/error_messages', object: f.object %>
-        <div class="field">
-          <%= f.text_field :title, placeholder: "タイトル(任意)", class: 'form-control' %>
-          <%= f.text_area :content, placeholder: "本文", class: 'form-control', style: "height:200px;" %>
+      </div>
+        <div id="comment-form">
+          <%= render partial: 'comments/comment_form' %>
         </div>
-        <div class="action">
-          <%= f.submit '投稿', class: "btn btn-success left-btn" %>
-        </div>
-      <% end %>
+
     </article>
   </div>
 </div>

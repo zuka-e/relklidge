@@ -17,6 +17,14 @@
       <div class="balloon content">
           <%= comment.content %>
       </div>
+      <div class="action">
+      <% if comment.user == current_user %>
+        <%= link_to "編集", user_post_comment_path(current_user.id, @post.id, comment.id),
+        method: :patch, class: "btn btn-info", remote: true %>
+        <%= link_to "削除", user_post_comment_path(current_user.id, @post.id, comment.id),
+        method: :delete, class: "btn btn-danger" %>
+      <% end %>
+      </div>
     </section>
   <% end %>
 
