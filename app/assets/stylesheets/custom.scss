@@ -166,3 +166,21 @@ li.list-group-item.middle-item:first-child {
     background: sandybrown;
   }
 }
+
+//
+.timer {
+  position: absolute;
+  right: 1.5%;
+}
+
+#count_str {
+  position: absolute;
+  right: 1.5%;
+}
+
+.basic-page .field textarea {
+  resize: none;
+  width: 100%;
+  height: 600px;
+  padding: 1%;
+}
