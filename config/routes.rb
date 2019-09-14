@@ -9,19 +9,21 @@ Rails.application.routes.draw do
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
-  resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:new, :create, :show, :edit, :update] do
+    resources :posts, only: [:show, :update, :destroy] do
+      resources :comments, only: [:create, :update, :destroy]
+    end
+  end
+  resources :posts, only: [:index, :new, :create]
   get '/users/:id/myposts', to: 'users#myposts', as: 'myposts'
   get '/users/:id/withdrawal', to: 'users#withdrawal', as: 'withdrawal'
   patch '/users/:id/withdrawal', to: 'users#quit', as: 'quit'
-  resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
-    resources :comments, only: [:create, :update, :destroy]
-  end
-  resources :likes, only: [:create, :destroy]
   resources :categories, only: [:index, :show] do
     resources :sections, only: [] do
       resources :items, only: [:show]
     end
   end
+  resources :likes, only: [:create, :destroy]
   resources :tags, only: [:index, :create, :update]
   resources :favorite_tags, only: [:create, :destroy]
   resources :post_tags, only: [:create, :destroy]

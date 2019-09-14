@@ -6,7 +6,7 @@
   <div class="col-md-9 index">
     <% @posts.each do |post| %>
       <div class="list-group">
-        <%= link_to post_path(post), class: "list-group-item" do %>
+        <%= link_to user_post_path(post.user_id, post), class: "list-group-item" do %>
           <h3 class="list-group-item-heading">
             <%= attachment_image_tag post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
             <%= "#{ post.title }" %>

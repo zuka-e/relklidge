@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 2019_09_12_070047) do
     t.integer "user_id"
     t.string "title", null: false
     t.text "content", null: false
-    t.integer "writing_time", default: 0
+    t.string "writing_time", default: "00:00:00.00"
     t.boolean "is_open", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
