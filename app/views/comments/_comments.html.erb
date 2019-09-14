@@ -1,0 +1,22 @@
+
+  <% @post.comments.each do |comment| %>
+    <section>
+      <div class="field">
+        <%= link_to posts_path( user: comment.user.name ) do %>
+          <%= attachment_image_tag comment.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
+          <%= "@ #{ comment.user.name }" %>
+        <% end %>
+        <time class="times">
+          作成日時 <%= comment.created_at.strftime('%Y/%m/%d %H:%M') %><br>
+          更新日時 <%= comment.updated_at.strftime('%Y/%m/%d %H:%M') %>
+        </time>
+        <div class="comment-title">
+          <%= comment.title %>
+        </div>
+      </div>
+      <div class="balloon content">
+          <%= comment.content %>
+      </div>
+    </section>
+  <% end %>
+

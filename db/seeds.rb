@@ -46,7 +46,7 @@ categories.count.times do |index|
 end
 
 # ユーザを生成
-User.create!( name: 'name', email: 'user@test.jp', password: 'password', password_confirmation: 'password')
+User.create!( name: 'テストユーザ', email: 'user@test.jp', password: 'password', password_confirmation: 'password')
 names = %w[Amy Bob Cyan Dim Eif Fena Gon Hon Ion John]
 names.each do |w|
   email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@test.com"

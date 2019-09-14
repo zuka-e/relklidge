@@ -40,6 +40,7 @@ class PostsController < ApplicationController
     ranked_tag_id = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
     @tags = Tag.find(ranked_tag_id)
     @post = Post.find_by(user_id: params[:user_id], id: params[:id])
+    @comment = Comment.new
   end
 
   private

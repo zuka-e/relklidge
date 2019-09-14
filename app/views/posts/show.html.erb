@@ -5,7 +5,6 @@
   </aside>
   <div class="col-md-9 index">
     <article class="article-box">
-
       <section>
         <div class="field">
           <h1><%= @post.title%></h1>
@@ -35,30 +34,21 @@
           <%= @post.content%>
         </div>
       </section>
-
       <div class="comments">
-        <% @post.comments.each do |comment| %>
-          <section>
-            <div class="field">
-              <%= link_to posts_path( user: comment.user.name ) do %>
-                <%= attachment_image_tag comment.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
-                <%= "@ #{ comment.user.name }" %>
-              <% end %>
-              <time class="times">
-                作成日時 <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
-                更新日時 <%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %>
-              </time>
-              <div class="comment-title">
-                <%= comment.title %>
-              </div>
-            </div>
-            <div class="balloon content">
-              <%= comment.content %>
-            </div>
-          </section>
-        <% end %>
-      </div>
-
+        <div id="new-comments">
+          <%= render partial: 'comments/comments' %>
+        </div>
+      <%= form_for(@comment, url: user_post_comments_path(current_user.id, @post.id), remote: true) do |f| %>
+        <%= hidden_field_tag "stored_url", request.url %>
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.text_field :title, placeholder: "タイトル(任意)", class: 'form-control' %>
+          <%= f.text_area :content, placeholder: "本文", class: 'form-control', style: "height:200px;" %>
+        </div>
+        <div class="action">
+          <%= f.submit '投稿', class: "btn btn-success left-btn" %>
+        </div>
+      <% end %>
     </article>
   </div>
 </div>

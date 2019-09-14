@@ -253,5 +253,9 @@ li.list-group-item.middle-item:first-child {
       border-right: 9px solid #ddd;
       z-index: 1;
     }
+    .action {
+      text-align: right;
+      margin-top: 3px;
+    }
   }
 }
