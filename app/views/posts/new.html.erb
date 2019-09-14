@@ -11,7 +11,7 @@
 			<%= label_tag :is_open, "公開する" %>
       <div class="field">
         <div class="timer">
-          <%= f.text_field :writing_time, value: '00:00:00.00', id: 'timer_time' %>
+          <%= f.text_field :writing_time, value: '00:00:00.00', id: 'timer_time', readonly: true %>
           <%= button_tag 'スタート', type: 'button', id: "startTimer" %>
           <%= button_tag 'リセット', type: 'button', id: "resetTimer" %>
         </div>

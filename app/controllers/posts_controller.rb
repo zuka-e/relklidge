@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   def index
     if params[:tag].present?
       @posts = Post.joins(:tags).where("tags.name = ?", params[:tag]).page(params[:page])
+    elsif params[:user].present?
+      @posts = Post.joins(:user).where("users.name = ?", params[:user]).page(params[:page])
     else
       @posts = Post.page(params[:page])
     end
@@ -35,7 +37,9 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    ranked_tag_id = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
+    @tags = Tag.find(ranked_tag_id)
+    @post = Post.find_by(user_id: params[:user_id], id: params[:id])
   end
 
   private

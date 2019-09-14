@@ -38,11 +38,22 @@ html body {
     margin-bottom: 20px;
     margin-top: 20px;
   }
+  a {
+    color: #333333;
+  }
+  section {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 30px;
+  }
   .glyphicon {
     padding-right: 5px;
   }
   .field {
     margin-bottom: 30px;
+    position: relative;
+    img {
+      margin-right: 10px;
+    }
   }
 }
 
@@ -155,11 +166,13 @@ li.list-group-item.middle-item:first-child {
 // タグ一覧
 .tag-index {
   display: inline-block;
-  width: 24%;
-  margin-bottom: 30px;
+  margin: 0 1% 1% 0;
+  padding: 0.2% 1%;
   font-size: 1.5em;
+  background: cornsilk;
+  border-radius: 5px;
   .char-area {
-    background: cornsilk;
+    white-space: nowrap;
   }
   .badge {
     margin-left: 3%;
@@ -167,7 +180,7 @@ li.list-group-item.middle-item:first-child {
   }
 }
 
-//
+// 投稿作成
 .timer {
   position: absolute;
   right: 1.5%;
@@ -183,4 +196,62 @@ li.list-group-item.middle-item:first-child {
   width: 100%;
   height: 600px;
   padding: 1%;
+}
+
+// 投稿詳細
+.article-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 3%;
+  .times {
+    font-size: 0.8em;
+    color: dimgray;
+    position: absolute;
+    right: 1.5%;
+    top: 20%;
+  }
+  .evaluation {
+    position: absolute;
+    right: 1.5%;
+    bottom: -15px;
+  }
+  .comments {
+    .field {
+      margin: 30px auto auto auto;
+    }
+    .comment-title {
+      display: inline-block;
+      width: 60%;
+      margin: auto 5%;
+    }
+    .balloon {
+      position: relative;
+      display: inline-block;
+      margin-left: 10%;
+      padding: 1%;
+      border: solid 1px #ddd;
+      border-radius: 5px;
+    }
+    .balloon:before {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      padding-right: 0px;
+      margin-left: -14px;
+      border: 6px solid transparent;
+      border-right: 8px solid #fff;
+      z-index: 2;
+    }
+    .balloon:after {
+      content: "";
+      position: absolute;
+      left: 2px;
+      top: 6px;
+      margin-left: -18px;
+      border: 7px solid transparent;
+      border-right: 9px solid #ddd;
+      z-index: 1;
+    }
+  }
 }

@@ -1,2 +1,64 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
+<% provide(:title, @post.title)%>
+<div class="basic-page row">
+  <aside>
+    <%= render 'shared/tag_side_bar' %>
+  </aside>
+  <div class="col-md-9 index">
+    <article class="article-box">
+
+      <section>
+        <div class="field">
+          <h1><%= @post.title%></h1>
+        </div>
+        <div class="field">
+          <%= link_to posts_path( user: @post.user.name ) do %>
+            <%= attachment_image_tag @post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
+            <%= "@ #{ @post.user.name }" %>
+          <% end %>
+          <time class="times">
+            作成日時 <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
+            更新日時 <%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %>
+          </time>
+          <div class="evaluation">
+            <span class="glyphicon glyphicon-thumbs-up"><%= "#{ @post.likes.count }" %></span>
+            <span class="glyphicon glyphicon-comment"><%= "#{ @post.comments.count }" %></span>
+          </div>
+        </div>
+        <div class="field">
+          <% @post.tags.each do |tag| %>
+            <%= link_to posts_path( tag: tag.name ), class:"tag-index", style: "font-size: 1em;" do %>
+              <div class="char-area"><%= tag.name %></div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= @post.content%>
+        </div>
+      </section>
+
+      <div class="comments">
+        <% @post.comments.each do |comment| %>
+          <section>
+            <div class="field">
+              <%= link_to posts_path( user: comment.user.name ) do %>
+                <%= attachment_image_tag comment.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
+                <%= "@ #{ comment.user.name }" %>
+              <% end %>
+              <time class="times">
+                作成日時 <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
+                更新日時 <%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %>
+              </time>
+              <div class="comment-title">
+                <%= comment.title %>
+              </div>
+            </div>
+            <div class="balloon content">
+              <%= comment.content %>
+            </div>
+          </section>
+        <% end %>
+      </div>
+
+    </article>
+  </div>
+</div>
