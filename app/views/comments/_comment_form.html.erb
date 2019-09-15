@@ -1,4 +1,4 @@
-<%= form_for([current_user,@post,@comment], remote: true) do |f| %>
+<%= form_for([current_user, @post, @comment], remote: true) do |f| %>
   <%= hidden_field_tag "stored_url", request.url %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">

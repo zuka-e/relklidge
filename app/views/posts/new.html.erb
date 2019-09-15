@@ -2,44 +2,9 @@
 <% provide(:title, "新規投稿")%>
 <div class="basic-page row">
   <div class="col-sm-12">
-    <p class="alert alert-info">
-    "タイトル" と "本文" を入力後 "投稿" を押してください
-    </p>
-    <%= form_for(@post) do |f| %>
-      <%= render 'shared/error_messages', object: f.object %>
-      <%= check_box_tag :is_open %>
-			<%= label_tag :is_open, "公開する" %>
-      <div class="field">
-        <div class="timer">
-          <%= f.text_field :writing_time, value: '00:00:00.00', id: 'timer_time', readonly: true %>
-          <%= button_tag 'スタート', type: 'button', id: "startTimer" %>
-          <%= button_tag 'リセット', type: 'button', id: "resetTimer" %>
-        </div>
-      </div>
-      <div class="field">
-        <%= f.label :title, '' %>
-        <%= f.text_field :title, placeholder: "タイトル", class: 'form-control' %>
-      </div>
-      <div class="field">
-        <%= f.select(:tags,
-        options_from_collection_for_select(Tag.all, :id, :name, @post_tags_ids[0]),
-        include_blank: '選択してください',
-        class: "form-control") %>
-        <%= check_box_tag :new_tag %>
-				<%= label_tag :new_tag, "新規タグ" %>
-				<%= text_field_tag "tag[name]", "", placeholder: 'タグ名'%>
-      </div>
-      <div class="field">
-        <%= f.label :content, '' %><span id="count_str">0文字</span>
-        <%= f.text_area :content, placeholder: "本文", class: 'form-control' %>
-      </div>
-
-      <div class="field">
-        <div class="select-actions">
-          <%= f.submit '投稿', data: { confirm: '保存します' }, class: "btn btn-success left-btn" %>
-          <%= link_to '戻る', request.referrer, data: { confirm: '編集内容は破棄されます' },class: "btn btn-danger right-btn" %>
-        </div>
-      </div>
-    <% end %>
+    <p class="alert alert-info">"タイトル" と "本文" を入力後 "投稿" を押してください</p>
+    <div id="post-form">
+      <%= render partial: 'post_form' %>
+    </div>
   </div>
 </div>

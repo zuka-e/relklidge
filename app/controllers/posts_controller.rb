@@ -27,9 +27,9 @@ class PostsController < ApplicationController
 			@post.tags << tag
     end
     if @post.save
-      @post.tags << Tag.find(params[:tags])
+      @post.tags << Tag.find(params[:post][:tags])
       flash[:success] = '投稿が作成されました'
-      redirect_to @post
+      redirect_to [@post.user, @post]
     else
       flash.now[:danger] = '保存されていません'
       render 'new'
@@ -37,10 +37,38 @@ class PostsController < ApplicationController
   end
 
   def show
-    ranked_tag_id = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
-    @tags = Tag.find(ranked_tag_id)
+    @ranked_tag_id ||= PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
+    @tags = Tag.find(@ranked_tag_id)
     @post = Post.find_by(user_id: params[:user_id], id: params[:id])
     @comment = Comment.new
+  end
+  def update
+    @post = Post.find_by(id: params[:id])
+    if params[:post].present?
+      if params[:new_tag] && params[:tag][:name].present?
+        tag = Tag.create(tag_params)
+        @post.tags << tag
+      end
+      params[:post][:is_open] == '1' ? @post.is_open = true : @post.is_open = false
+      @post.update(post_params)
+      @post.tags << Tag.find(params[:post][:tags])
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: params[:stored_url]) }
+        format.js { render 'show'}
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: params[:stored_url]) }
+        format.js
+      end
+    end
+  end
+  def destroy
+    post = Post.find(params[:id])
+    if post.destroy
+      flash[:danger] = '投稿は削除されました'
+      redirect_to posts_url
+    end
   end
 
   private

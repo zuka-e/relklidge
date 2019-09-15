@@ -16,15 +16,16 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @post = Post.find_by(id: params[:post_id])
-      respond_to do |format|
-				format.html { redirect_back(fallback_location: params[:stored_url]) }
-				format.js
-      end
     if params[:comment].present?
       @comment.update(comment_params)
       respond_to do |format|
         format.html { redirect_back(fallback_location: params[:stored_url]) }
         format.js { render 'create' }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: params[:stored_url]) }
+        format.js
       end
     end
   end

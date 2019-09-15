@@ -6,43 +6,23 @@
   <div class="col-md-9 index">
     <article class="article-box">
       <section>
-        <div class="field">
-          <h1><%= @post.title%></h1>
-        </div>
-        <div class="field">
-          <%= link_to posts_path( user: @post.user.name ) do %>
-            <%= attachment_image_tag @post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
-            <%= "@ #{ @post.user.name }" %>
-          <% end %>
-          <time class="times">
-            作成日時 <%= @post.created_at.strftime('%Y/%m/%d %H:%M') %><br>
-            更新日時 <%= @post.updated_at.strftime('%Y/%m/%d %H:%M') %>
-          </time>
-          <div class="evaluation">
-            <span class="glyphicon glyphicon-thumbs-up"><%= "#{ @post.likes.count }" %></span>
-            <span class="glyphicon glyphicon-comment"><%= "#{ @post.comments.count }" %></span>
-          </div>
-        </div>
-        <div class="field">
-          <% @post.tags.each do |tag| %>
-            <%= link_to posts_path( tag: tag.name ), class:"tag-index", style: "font-size: 1em;" do %>
-              <div class="char-area"><%= tag.name %></div>
-            <% end %>
-          <% end %>
-        </div>
-        <div class="field">
-          <%= @post.content%>
+        <div id="display-post">
+          <%= render partial: 'display_post' %>
         </div>
       </section>
       <div class="comments">
         <div id="new-comment">
           <%= render partial: 'comments/comments' %>
         </div>
-      </div>
         <div id="comment-form">
           <%= render partial: 'comments/comment_form' %>
         </div>
-
+      </div>
     </article>
+  </div>
+</div>
+<div class="basic-page row">
+  <div class="col-sm-12">
+    <div id="post-form"></div>
   </div>
 </div>
