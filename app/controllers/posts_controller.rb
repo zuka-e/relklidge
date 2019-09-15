@@ -9,8 +9,8 @@ class PostsController < ApplicationController
     end
     @categories = Category.all
     # group 重複まとめ, Arel.sql() 対injection, count() postの多い順(order用), pluck post_idのみ出力
-    ranked_tag_id = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
-    @tags = Tag.find(ranked_tag_id)
+    ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
+    @popular_tags = Tag.find(ranked_tag_ids)
   end
 
   def new
@@ -37,8 +37,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @ranked_tag_id ||= PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
-    @tags = Tag.find(@ranked_tag_id)
+    ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
+    @popular_tags = Tag.find(ranked_tag_ids)
     @post = Post.find_by(user_id: params[:user_id], id: params[:id])
     @comment = Comment.new
   end

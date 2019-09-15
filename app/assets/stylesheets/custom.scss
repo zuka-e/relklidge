@@ -47,6 +47,22 @@ html body {
   }
   .glyphicon {
     padding-right: 5px;
+    &:before {
+      margin-right: 5px;
+    }
+  }
+  .glyphicon-tags:before {
+    color: forestgreen;
+  }
+  .glyphicon-comment:before {
+    color: dodgerblue;
+  }
+  .glyphicon-thumbs-up:before {
+    color: crimson;
+  }
+  .badge {
+    border-radius: 45%;
+    background-color: tomato;
   }
   .btn {
     color: #fff;
@@ -101,17 +117,42 @@ html body {
 }
 
 // リストグループ
-.side-bar .list-group {
+.basic-page .list-group.vertical-group {
+  margin-bottom: 30px;
+}
+.basic-page .list-group {
   margin-bottom: 0px;
+  .list-header {
+    text-align: center;
+    border-bottom-right-radius: unset;
+    border-bottom-left-radius: unset;
+  }
+  .list-group-item {
+    margin-bottom: 0;
+  }
+  .list-group-content-left {
+    margin-right: 15%;
+  }
+  .list-group-content-center {
+    margin-left: 5%;
+  }
   .middle-item {
-    border-bottom: unset;
+    border-top: unset;
+    border-top-right-radius: unset;
+    border-top-left-radius: unset;
+    border-bottom-right-radius: unset;
+    border-bottom-left-radius: unset;
   }
   .under-section {
     padding-left: 10%;
   }
   .last-item {
     border-top: unset;
-    padding: 1px 0;
+    padding: 2px 0;
+    position: relative;
+    top: -3px;
+    background: #fff;
+    z-index: 2;
   }
   .rank-item {
     padding-left: 3%;
@@ -122,34 +163,36 @@ html body {
     }
   }
 }
-
-.index .list-group {
-  margin-bottom: 0;
-  .list-group-item {
-    border-top-right-radius: unset;
-    border-top-left-radius: unset;
-    border-bottom-right-radius: unset;
-    border-bottom-left-radius: unset;
+.content-set-with-index {
+  display: flex;
+  margin-bottom: 10px;
+  .index-number,
+  .subject-side {
+    align-self: center;
+    text-align: center;
+    margin: 0 3%;
+  }
+  .index-number {
+    flex-grow: 0.1;
+  }
+  .subject-side {
+    flex-grow: 0.3;
+  }
+  .content-side {
+    flex-grow: 0.6;
+    flex-basis: 60%;
+    word-break: break-word;
   }
 }
-
-.list-group-item-left {
-  margin-right: 15%;
+.content-half-with-index {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  .half-content {
+    align-self: center;
+    text-align: center;
+  }
 }
-.list-group-item-center {
-  margin-left: 5%;
-}
-
-li.list-group-item.middle-item:first-child {
-  border-top-right-radius: unset;
-  border-top-left-radius: unset;
-  border-bottom-right-radius: unset;
-  border-bottom-left-radius: unset;
-}
-.index .list-group:last-child .list-group-item {
-  border-bottom: 1px solid #ddd;
-}
-
 // カテゴリー一覧
 .category-item {
   width: 40%;

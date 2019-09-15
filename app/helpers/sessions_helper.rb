@@ -6,7 +6,7 @@ module SessionsHelper
     end
   end
   def log_in?
-    !currnet_user.nil?
+    !current_user.nil?
   end
 
 end

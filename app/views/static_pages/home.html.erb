@@ -1,2 +1,85 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<% provide(:title, '')%>
+<div class="basic-page row">
+  <div class="col-sm-3 col-xs-0 side-bar">
+    <aside>
+      <ul class="list-group vertical-group">
+      <li class="list-group-item list-header">カテゴリー</li>
+        <% @categories.each do |category| %>
+          <%= link_to  category_path(category) do %>
+            <li class="list-group-item middle-item">
+              <%= category.name %>
+            </li>
+          <% end %>
+        <% end %>
+        <li class="list-group-item last-item"></li>
+      </ul>
+    </aside>
+    <%= render 'shared/tag_side_bar' %>
+  </div>
+  <div class="col-sm-6 index">
+  <div class="list-group">
+    <span class="list-group-item list-header">最近の投稿</span>
+  </div>
+    <% @posts.each do |post| %>
+      <div class="list-group">
+        <%= link_to user_post_path(post.user_id, post), class: "list-group-item middle-item" do %>
+          <h3 class="list-group-item-heading">
+            <%= attachment_image_tag post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
+            <%= post.title %>
+          </h3>
+          <span class="list-group-item-text"><%= "#{ post.created_at.strftime('%Y/%m/%d %H:%M') }___"%>
+          <span class="glyphicon glyphicon-thumbs-up"><%= post.likes.count %></span>
+          <span class="glyphicon glyphicon-comment"><%= post.comments.count %></span>
+          <span class="glyphicon glyphicon-tags">
+            <% post.tags.each do |tag| %>
+            <%= tag.name %>
+            <% end %>
+          </span>
+          </span>
+          <p class="list-group-item-text"><%= "#{ post.content[0..140] }..." %></p>
+        <% end %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <%= paginate @posts, class: "paginate" %>
+    </div>
+  </div>
+  <div class="col-sm-3 index">
+    <aside>
+        <ul class="list-group vertical-group">
+          <li class="list-group-item list-header">MENU</li>
+          <li class="list-group-item middle-item">
+            <% if log_in? %>
+              <%= link_to 'マイページ', user_path(current_user), class: "btn btn-info btn-block" %>
+            <% else %>
+              <%= link_to 'マイページ', login_path(current_user), class: "btn btn-info btn-block" %>
+            <% end %>
+            <p class="list-group-item-text" style="margin-bottom: 0;">初めてのご利用ですか？</p>
+            <%= link_to '新規登録する', new_user_path, class: "btn btn-success btn-block" %>
+          </li>
+          <li class="list-group-item last-item"></li>
+        </ul>
+        <ul class="list-group vertical-group">
+          <li class="list-group-item list-header">人気の投稿</li>
+          <% @popular_posts.each_with_index do |post, i| %>
+            <li class="list-group-item middle-item rank-item">
+              <%= link_to user_post_path(post.user_id, post) do %>
+                <div class="content-set-with-index">
+                  <div class="index-number"><%= "#{ i+1 }" %></div>
+                  <div class="subject-side"><%= attachment_image_tag post.user, :image, :fill, 25, 25, format: 'jpg', fallback: "/no_image.jpg", size:'25x25'%></div>
+                  <div class="content-side">
+                    <%=  post.title %>
+                  </div>
+                </div>
+              <% end %>
+              <div class="content-half-with-index">
+                <div class="half-content glyphicon glyphicon-thumbs-up"><%= post.likes.count %></div>
+                <div class="half-content glyphicon glyphicon-tags"><%= "#{post.tags[0].name } 他" %></div>
+              </div>
+            </li>
+          <% end %>
+          <li class="list-group-item last-item"></li>
+        </ul>
+    </aside>
+  </div>
+</div>
