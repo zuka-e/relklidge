@@ -1,9 +1,11 @@
 <% provide(:title, "投稿一覧")%>
 <div class="basic-page row">
-  <aside>
-    <%= render 'shared/tag_side_bar' %>
-  </aside>
-  <div class="col-md-9 index">
+  <div class="col-sm-3 col-xs-0 side-bar">
+    <aside>
+      <%= render 'shared/tag_side_bar' %>
+    </aside>
+  </div>
+  <div class="col-sm-9 col-xs-12 index">
     <% @posts.each do |post| %>
       <div class="list-group">
         <%= link_to user_post_path(post.user_id, post), class: "list-group-item" do %>

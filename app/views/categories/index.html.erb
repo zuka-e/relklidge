@@ -1,6 +1,6 @@
 <% provide(:title, "カテゴリー")%>
 <div class="row basic-page">
-	<div class="col-md-8 col-md-offset-2 categories clearfix">
+	<div class="col-sm-8 col-sm-offset-2  col-xs-12 categories clearfix">
     <% @categories.each do |category| %>
       <div class="category-item">
         <%= link_to category_path(category.id) do %>

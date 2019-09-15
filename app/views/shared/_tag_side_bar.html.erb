@@ -1,15 +1,13 @@
-<div class="col-md-3 side-bar">
-  <ul class="list-group">
-    <li class="list-group-item">タグランキング</li>
-    <% @tags.each_with_index do |tag, i| %>
-      <%= link_to posts_path( tag: tag.name ) do %>
-        <li class="list-group-item middle-item rank-item">
-          <span class="rank-box"><span class="list-group-item-left"><%= "#{ i+1 }" %></span></span>
-          <span class="list-group-item-center"><%= "#{ tag.name }" %></span>
-          <span class="badge"><%= "#{ @j = tag.posts.count}" %></span>
-        </li>
-      <% end %>
+<ul class="list-group">
+  <li class="list-group-item list-header">タグランキング</li>
+  <% @popular_tags.each_with_index do |tag, i| %>
+    <%= link_to posts_path( tag: tag.name ) do %>
+      <li class="list-group-item middle-item rank-item">
+        <span class="rank-box"><span class="list-group-content-left"><%= "#{ i+1 }" %></span></span>
+        <span class="list-group-content-center"><%= tag.name %></span>
+        <span class="badge"><%= tag.posts.count %></span>
+      </li>
     <% end %>
-    <li class="list-group-item last-item"></li>
-  </ul>
-</div>
+  <% end %>
+  <li class="list-group-item last-item"></li>
+</ul>
