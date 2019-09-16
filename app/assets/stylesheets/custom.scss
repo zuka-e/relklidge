@@ -123,6 +123,9 @@ html body {
 .basic-page .list-group {
   margin-bottom: 0px;
   .list-header {
+    background: yellowgreen;
+    color: #fff;
+    font-size: 1.5em;
     text-align: center;
     border-bottom-right-radius: unset;
     border-bottom-left-radius: unset;
@@ -303,5 +306,30 @@ html body {
       text-align: right;
       margin-top: 3px;
     }
+  }
+}
+.basic-page .table > tbody > tr {
+  th,
+  td {
+    vertical-align: middle;
+  }
+  .t-index {
+    width: 5%;
+    text-align: center;
+  }
+  .t-number {
+    width: 10%;
+    text-align: center;
+  }
+  .t-user {
+    width: 15%;
+  }
+  .t-subject {
+    width: 20%;
+    word-break: break-word;
+  }
+  .t-content {
+    width: 60%;
+    word-break: break-word;
   }
 }

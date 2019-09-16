@@ -1,2 +1,51 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+<% provide(:title, "投稿一覧")%>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
+		<div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ユーザ</th>
+            <th>タイトル</th>
+            <th>本文(140文字)</th>
+            <th>いいね数<br>コメント数</th>
+            <th>タグ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @posts.each do |post| %>
+            <tr>
+              <td class="t-index"><%= link_to post.id, admin_user_path(post.user) %></td>
+              <td class="t-user">
+                <%= link_to admin_user_path(post.user) do %>
+                  <%= attachment_image_tag post.user, :image, :fill, 40, 40, format: 'jpg', fallback: "/no_image.jpg", size: '40x40' %>
+                  <%= post.user.name %>
+                <% end %>
+              </td>
+              <td class="t-suject"><%= link_to post.title, admin_user_post_path(post.user, post) %></td>
+              <td class="t-content" style="width: 40%;"><%= post.content[0..139] %></td>
+              <td class="t-number">
+                <span class="glyphicon glyphicon-thumbs-up"></span><%= post.likes.count %><br>
+                <span class="glyphicon glyphicon-comment"></span><%= post.comments.count %>
+              </td>
+              <td class="t-suject">
+                <% post.tags.each_with_index do |tag, i| %>
+                  <%= link_to admin_posts_path(tag: tag.name) do %>
+                    <span class="glyphicon glyphicon-tags"></span><%= tag.name %><br>
+                  <% end %>
+                  <% if i == 4 && post.tags.count > 5 %>
+                      <div><%= "他 #{ post.tags.count - 5 }" %></div>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+      <div class="text-center">
+        <%= paginate @posts, class: "paginate" %>
+      </div>
+    </div>
+  </div>
