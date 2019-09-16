@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
   end
   resources :likes, only: [:create, :destroy]
-  resources :tags, only: [:index, :create, :update]
+  resources :tags, only: [:index, :create]
   resources :favorite_tags, only: [:create, :destroy]
   resources :post_tags, only: [:create, :destroy]
   resources :item_tags, only: [:create, :destroy]
@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:index, :new]
     resources :comments, only: [:index]
     patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
-    resources :categories, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resources :categories do
       resources :sections, only: [:index, :create, :show, :update, :destroy]
     end
     resources :items, only: [:create, :update, :destroy]
