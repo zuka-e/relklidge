@@ -51,14 +51,23 @@ html body {
       margin-right: 5px;
     }
   }
+  .glyphicon-user:before {
+    color: sienna;
+  }
   .glyphicon-tags:before {
     color: forestgreen;
+  }
+  .glyphicon-pencil:before {
+    color: cornflowerblue;
   }
   .glyphicon-comment:before {
     color: dodgerblue;
   }
   .glyphicon-thumbs-up:before {
     color: crimson;
+  }
+  .glyphicon-file:before {
+    color: seagreen;
   }
   .badge {
     border-radius: 45%;
@@ -314,28 +323,35 @@ html body {
     }
   }
 }
-.basic-page .table > tbody > tr {
-  th,
-  td {
-    vertical-align: middle;
+.basic-page .table > {
+  thead > tr {
+    .t-number {
+      text-align: center;
+    }
   }
-  .t-index {
-    width: 5%;
-    text-align: center;
-  }
-  .t-number {
-    width: 10%;
-    text-align: center;
-  }
-  .t-user {
-    width: 15%;
-  }
-  .t-subject {
-    width: 20%;
-    word-break: break-word;
-  }
-  .t-content {
-    width: 60%;
-    word-break: break-word;
+  tbody > tr {
+    th,
+    td {
+      vertical-align: middle;
+    }
+    .t-index {
+      width: 5%;
+      text-align: center;
+    }
+    .t-number {
+      width: 10%;
+      text-align: center;
+    }
+    .t-user {
+      width: 15%;
+    }
+    .t-subject {
+      width: 20%;
+      word-break: break-word;
+    }
+    .t-content {
+      width: 60%;
+      word-break: break-word;
+    }
   }
 }

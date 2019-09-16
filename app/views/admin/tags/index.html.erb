@@ -1,2 +1,39 @@
-<h1>Admin::Tags#index</h1>
-<p>Find me in app/views/admin/tags/index.html.erb</p>
+<% provide(:title, "タグ一覧")%>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
+		<div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th class="t-number">ID</th>
+            <th>タグ名</th>
+            <th class="t-number">作成日時</th>
+            <th class="t-number">ユーザ数</th>
+            <th class="t-number">投稿数</th>
+            <th class="t-number" >項目数</th>
+            <th col-span=1></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tags.each do |tag| %>
+            <tr>
+              <td class="t-index"><%= tag.id %></td>
+              <td class="t-suject"><%= tag.name %></td>
+              <td class="t-number"><%= tag.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+              <td class="t-number"><span class="glyphicon glyphicon-user"><%= tag.users.count %></td>
+              <td class="t-number"><span class="glyphicon glyphicon-pencil"></span><%= tag.posts.count %></td>
+              <td class="t-number"><span class="glyphicon glyphicon-file"></span><%= tag.items.count %></td>
+              <td class="t-index">
+                <%= link_to '削除', admin_tag_path(tag),
+              method: :delete, data: { confirm: "'削除済タグに変更します'"},class: "btn btn-danger" %>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+      <div class="text-center">
+        <%= paginate @tags, class: "paginate" %>
+      </div>
+    </div>
+  </div>
