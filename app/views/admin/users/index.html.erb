@@ -1,2 +1,55 @@
-<h1>Admin::Users#index</h1>
-<p>Find me in app/views/admin/users/index.html.erb</p>
+<% provide(:title, "ユーザ一覧")%>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
+		<div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>ユーザ</th>
+            <th>メールアドレス</th>
+            <th>投稿数<br>コメント数</th>
+            <th>お気に入り</th>
+            <th>退会<br>ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+            <tr>
+              <td class="t-index"><%= link_to user.id, admin_user_path(user) %></td>
+              <td class="t-user">
+                <%= link_to admin_user_path(user) do %>
+                  <%= attachment_image_tag user, :image, :fill, 40, 40, format: 'jpg', fallback: "/no_image.jpg", size: '40x40' %>
+                  <%= link_to user.name %>
+                <% end %>
+              </td>
+              <td class="t-user"><%= link_to user.email, admin_user_path(user) %></td>
+              <td class="t-number">
+                <%= link_to admin_posts_path(user: user.name) do %>
+                  <span class="glyphicon glyphicon-pencil"></span><%= user.posts.count %>
+                <% end %><br>
+                <%= link_to admin_posts_path(commented_by: user.name) do %>
+                  <span class="glyphicon glyphicon-comment"></span><%= user.comments.count %>
+                <% end %>
+              </td>
+              <td class="t-content" style="width: 45%;">
+                <% user.tags[0..4].each_with_index do |tag, i| %>
+                  <%= link_to admin_posts_path(tag: tag.name) do %>
+                    <span class="glyphicon glyphicon-tags"></span><%= tag.name %>
+                  <% end %>
+                  <% if i == 4 && user.tags.count > 5 %>
+                      <div><%= "他 #{ user.tags.count - 5 }" %></div>
+                  <% end %>
+                <% end %>
+              </td>
+              <td style="width: 10%;"><%= user.is_quit %></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+      <div class="text-center">
+        <%= paginate @users, class: "paginate" %>
+      </div>
+    </div>
+  </div>
