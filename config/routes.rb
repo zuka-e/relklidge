@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     end
   end
   resources :posts, only: [:index, :new]
-  get '/users/:id/myposts', to: 'users#myposts', as: 'myposts'
   get '/users/:id/withdrawal', to: 'users#withdrawal', as: 'withdrawal'
   patch '/users/:id/withdrawal', to: 'users#quit', as: 'quit'
   resources :categories, only: [:index, :show] do
@@ -34,11 +33,14 @@ Rails.application.routes.draw do
     get    'login'   => 'sessions#new'
     post   'login'   => 'sessions#create'
     delete 'logout'  => 'sessions#destroy'
-    resources :users, only: [:index, :show]
-    patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
-    resources :posts, only: [:index, :new, :create, :show, :update, :destroy] do
-      resources :comments, only: [:index, :create, :update, :destroy]
+    resources :users, only: [:index, :show] do
+      resources :posts, only: [:create, :show, :update, :destroy] do
+        resources :comments, only: [:create, :update, :destroy]
+      end
     end
+    resources :posts, only: [:index, :new]
+    resources :comments, only: [:index]
+    patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
     resources :categories, only: [:index, :new, :create, :edit, :update, :destroy] do
       resources :sections, only: [:index, :create, :show, :update, :destroy]
     end

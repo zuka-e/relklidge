@@ -1,2 +1,45 @@
-<h1>Admin::Comments#index</h1>
-<p>Find me in app/views/admin/comments/index.html.erb</p>
+<% provide(:title, "コメント一覧")%>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
+		<div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>コメント</th>
+            <th>ユーザ</th>
+            <th>投稿</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each do |comment| %>
+            <tr>
+              <td class="t-index"><%= comment.id%></td>
+              <td class="t-content"><%= comment.content %></td>
+              <td class="t-user">
+                <%= link_to admin_user_path(comment.user) do %>
+                  <%= attachment_image_tag comment.user, :image, :fill, 40, 40, format: 'jpg', fallback: "/no_image.jpg", size: '40x40' %>
+                  <%= comment.user.name %>
+                <% end %>
+              </td>
+              <td class="t-subject">
+                <div><%= link_to comment.post.title, admin_user_post_path(comment.post.user, comment.post) %></div>
+                <% comment.post.tags[0..4].each_with_index do |tag, i| %>
+                  <%= link_to admin_posts_path(tag: tag.name) do %>
+                    <span class="glyphicon glyphicon-tags"></span><%= tag.name %><br>
+                  <% end %>
+                  <% if i == 4 && comment.post.count > 5 %>
+                      <div><%= "他 #{ comment.post.tags.count - 5 }" %></div>
+                  <% end %>
+                <% end %>
+              </td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </div>
+      <div class="text-center">
+        <%= paginate @comments, class: "paginate" %>
+      </div>
+    </div>
+  </div>
