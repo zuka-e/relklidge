@@ -1,2 +1,18 @@
-<h1>Admin::Categories#index</h1>
-<p>Find me in app/views/admin/categories/index.html.erb</p>
+<% provide(:title, "カテゴリー")%>
+<div class="row basic-page">
+	<div class="col-sm-8 col-sm-offset-2 col-xs-12 categories clearfix">
+    <div style="margin-bottom: 30px;">
+      <%= link_to '新規作成', new_admin_category_path, class: "btn btn-success btn-block" %>
+    </div>
+    <% @categories.each do |category| %>
+      <div class="category-item">
+        <%= link_to category_path(category.id) do %>
+          <%= attachment_image_tag category, :image, :fill, 300, 250, format: 'jpg', fallback: "/no_image.jpg", size:'300x250'%>
+          <h2><%= category.name %></h2>
+        <% end %>
+        <%= link_to '編集', edit_admin_category_path(category.id), class: "btn btn-info" %>
+      </div>
+    <% end %>
+    </div>
+	</div>
+</div>

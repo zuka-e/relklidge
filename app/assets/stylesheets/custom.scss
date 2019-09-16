@@ -200,6 +200,7 @@ html body {
 .category-item {
   width: 40%;
   margin-bottom: 30px;
+  position: relative;
   h2 {
     text-align: center;
     padding-top: 0px;
@@ -209,6 +210,11 @@ html body {
   }
   &:nth-child(even) {
     float: right;
+  }
+  .btn-info {
+    position: absolute;
+    right: 0;
+    bottom: 21px;
   }
 }
 
