@@ -6,8 +6,8 @@
         <h2>会員登録は必要ですか</h2>
           <p>サイトの閲覧は登録不要でご利用いただけます。解説文の投稿、また、他の利用者の投稿にいいね、コメントをする際には登録が必要となります。</p>
         <h2>退会はできますか</h2>
-        <% if !@current_user.nil? %>
-          <p><%= link_to 'こちらのページ', withdrawal_path(@current_user)%> から退会することができます。</p>
+        <% if log_in? %>
+          <p><%= link_to 'こちらのページ', withdrawal_path(current_user)%> から退会することができます。</p>
         <% else %>
           <p><%= link_to 'こちらのページ(ログインが必要です)', login_path %> から退会することができます。</p>
         <% end %>

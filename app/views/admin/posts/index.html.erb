@@ -5,11 +5,11 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>ID</th>
+            <th class="t-number">ID</th>
             <th>ユーザ</th>
             <th>タイトル</th>
             <th>本文(140文字)</th>
-            <th>いいね数<br>コメント数</th>
+            <th class="t-number">いいね数<br>コメント数</th>
             <th>タグ</th>
           </tr>
         </thead>
@@ -30,7 +30,7 @@
                 <span class="glyphicon glyphicon-comment"></span><%= post.comments.count %>
               </td>
               <td class="t-suject">
-                <% post.tags.each_with_index do |tag, i| %>
+                <% post.tags[0..4].each_with_index do |tag, i| %>
                   <%= link_to admin_posts_path(tag: tag.name) do %>
                     <span class="glyphicon glyphicon-tags"></span><%= tag.name %><br>
                   <% end %>

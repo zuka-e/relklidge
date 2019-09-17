@@ -16,7 +16,7 @@
     </aside>
     <%= render 'shared/tag_side_bar' %>
   </div>
-  <div class="col-sm-6 index">
+  <div class="col-sm-6 col-xs-12 index">
   <div class="list-group">
     <span class="list-group-item list-header">最近の投稿</span>
   </div>
@@ -44,7 +44,7 @@
       <%= paginate @posts, class: "paginate" %>
     </div>
   </div>
-  <div class="col-sm-3 index">
+  <div class="col-sm-3 col-xs-12 index">
     <aside>
         <ul class="list-group vertical-group">
           <li class="list-group-item list-header">MENU</li>
@@ -52,7 +52,7 @@
             <% if log_in? %>
               <%= link_to 'マイページ', user_path(current_user), class: "btn btn-info btn-block" %>
             <% else %>
-              <%= link_to 'マイページ', login_path(current_user), class: "btn btn-info btn-block" %>
+              <%= link_to 'マイページ', login_path, class: "btn btn-info btn-block" %>
             <% end %>
             <p class="list-group-item-text" style="margin-bottom: 0;">初めてのご利用ですか？</p>
             <%= link_to '新規登録する', new_user_path, class: "btn btn-success btn-block" %>
