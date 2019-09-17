@@ -9,15 +9,19 @@
     <article class="article-box">
       <section>
         <div id="display-post">
-          <%= render partial: 'display_post' %>
+          <%= render partial: 'display_post', locals: { creator: current_user } %>
         </div>
       </section>
       <div class="comments">
         <div id="new-comment">
-          <%= render partial: 'comments/comments' %>
+          <%= render partial: 'comments/comments', locals: { creator: current_user } %>
         </div>
         <div id="comment-form">
-          <%= render partial: 'comments/comment_form' %>
+          <% if  log_in? %>
+            <%= render partial: 'comments/comment_form', locals: { creator: current_user } %>
+          <% else %>
+            <%= link_to '投稿する(ログイン)', login_path, class: 'btn btn-info' %>
+          <% end %>
         </div>
       </div>
     </article>

@@ -25,9 +25,9 @@
 <div class="field">
   <%= @post.content%>
 </div>
-<% if @post.user == current_user %>
-  <%= link_to "編集", user_post_path(current_user.id, @post.id),
+<% if @post.user == creator %>
+  <%= link_to "編集", user_post_path(creator.id, @post.id),
   method: :patch, class: "btn btn-info freeze", remote: true %>
-  <%= link_to "削除", user_post_path(current_user.id, @post.id),
-  method: :delete, class: "btn btn-danger" %>
+  <%= link_to "削除", user_post_path(creator.id, @post.id),
+  method: :delete,data: { confirm: '投稿を削除します' }, class: "btn btn-danger" %>
 <% end %>

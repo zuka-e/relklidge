@@ -1,2 +1,9 @@
-<h1>Admin::Posts#new</h1>
-<p>Find me in app/views/admin/posts/new.html.erb</p>
+<% provide(:title, "新規投稿")%>
+<div class="basic-page row">
+  <div class="col-sm-12 col-xs-12">
+    <p class="alert alert-info">"タイトル" と "本文" を入力後 "投稿" を押してください</p>
+    <div id="post-form">
+      <%= render partial: 'post_form' %>
+    </div>
+  </div>
+</div>

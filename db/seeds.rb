@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者を生成
-Admin.create!( name: "管理者",
+Admin.create!( name: "Admin",
   image_id: "",
   email: "admin@test.jp",
   password: 'password',
@@ -46,7 +46,7 @@ categories.count.times do |index|
 end
 
 # ユーザを生成
-User.create!( name: 'テストユーザ', email: 'user@test.jp', password: 'password', password_confirmation: 'password')
+User.create!( name: '管理者', email: 'admin@test.jp', password: 'password', password_confirmation: 'password')
 names = %w[Amy Bob Cyan Dim Eif Fena Gon Hon Ion John]
 names.each do |w|
   email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@test.com"

@@ -1,2 +1,34 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<% provide(:title, @post.title)%>
+<div class="basic-page row">
+  <div class="col-sm-3 col-xs-0 side-bar">
+    <aside>
+      <%= render 'shared/tag_side_bar' %>
+    </aside>
+  </div>
+  <div class="col-sm-9 col-xs-12 index">
+    <article class="article-box">
+      <section>
+        <div id="display-post">
+          <%= render partial: 'posts/display_post', locals: { creator: User.first } %>
+        </div>
+      </section>
+      <div class="comments">
+        <div id="new-comment">
+          <%= render partial: 'comments/comments', locals: { creator: User.first } %>
+        </div>
+        <div id="comment-form">
+          <% if log_in? %>
+            <%= render partial: 'comments/comment_form', locals: { creator: User.first } %>
+          <% else %>
+            <%= link_to '投稿する(ログイン)', login_path, class: 'btn btn-info' %>
+          <% end %>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+<div class="basic-page row">
+  <div class="col-sm-12">
+    <div id="post-form"></div>
+  </div>
+</div>

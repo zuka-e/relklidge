@@ -1,8 +1,9 @@
-<%= form_for([current_user, @post, @comment], remote: true) do |f| %>
+<%= form_for([creator, @post, @comment], remote: true) do |f| %>
   <%= hidden_field_tag "stored_url", request.url %>
+  <%= hidden_field_tag "creator_id", creator.id %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.text_field :title, placeholder: "タイトル(任意)", class: 'form-control' %>
+    <%= f.hidden_field :title, placeholder: "タイトル(任意)", class: 'form-control' %>
     <%= f.text_area :content, placeholder: "本文", class: 'form-control', style: "height:200px;" %>
   </div>
   <div class="action">
