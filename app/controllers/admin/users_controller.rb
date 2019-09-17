@@ -1,8 +1,11 @@
 class Admin::UsersController < ApplicationController
 
   def index
-    @users = User.page(params[:page])
-    @users = @users.where(["name LIKE ?", "%#{params[:name]}%"]) if params[:name].present?
+    if params[:name].present?
+      @users = @users.where(["name LIKE ?", "%#{params[:name]}%"])
+    else
+      @users = User.page(params[:page])
+    end
   end
 
   def show
