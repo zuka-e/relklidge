@@ -1,12 +1,18 @@
 <% provide(:title, "タグ")%>
 <div class="row basic-page">
-	<div class="col-sm-8 col-sm-offset-2 col-xs-12 clearfix">
+	<div class="col-sm-12 col-xs-12 clearfix">
     <% @tags.each do |tag| %>
-      <%= link_to posts_path( tag: tag.name ), class:"tag-index" do %>
-        <div class="char-area">
-          <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
-        </div>
-      <% end %>
+      <div class="tag-index">
+        <%= link_to posts_path( tag: tag.name ) do %>
+          <div class="char-area">
+            <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+            <% if log_in? %>
+              <%= link_to '追加', user_path(current_user, tag: tag),
+                method: :patch,  class: "btn btn-success" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
 </div>

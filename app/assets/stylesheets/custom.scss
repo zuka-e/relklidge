@@ -76,6 +76,14 @@ html body {
   .btn {
     color: #fff;
   }
+  .nav-tabs > {
+    li.active > a {
+      background: #ffbc00;
+    }
+    li > a {
+      background: wheat;
+    }
+  }
   .field {
     margin-bottom: 30px;
     position: relative;
@@ -230,11 +238,11 @@ html body {
 // タグ一覧
 .tag-index {
   display: inline-block;
-  margin: 0 1% 1% 0;
-  padding: 0.2% 1%;
+  margin: 0 5px 10px 0;
+  padding: 7px 9px;
   font-size: 1.5em;
-  background: cornsilk;
-  border-radius: 5px;
+  background: #fff8b6;
+  border-radius: 10px;
   .char-area {
     white-space: nowrap;
   }
@@ -352,6 +360,28 @@ html body {
     .t-content {
       width: 60%;
       word-break: break-word;
+    }
+  }
+}
+
+aside .profile {
+  .profile-image {
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+  }
+  .table {
+    margin-top: 10px;
+    th {
+      background: #ff6868;
+      color: #fff;
+    }
+    td {
+      background: #fff;
+    }
+    label {
+      margin-bottom: 0;
     }
   }
 }

@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:index]
     patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
     resources :categories do
-      resources :sections, only: [:index, :create, :show, :update, :destroy]
+      resources :sections, only: [:create, :show, :update, :destroy]
     end
     resources :items, only: [:create, :update, :destroy]
     resources :tags, only: [:index, :create, :update, :destroy]
