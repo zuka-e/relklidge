@@ -88,4 +88,12 @@ $(document).on("turbolinks:load", function() {
   //   var num = $(this).val().length;
   //   $("#count_str").text(`${num}文字`);
   // });
+
+  // コメントicon クリック
+  $(document).on("click", "a[href='#new-comment']", function() {
+    $("#new-comment")[0].scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
+  });
 });

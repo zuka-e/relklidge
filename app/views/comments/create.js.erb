@@ -1,3 +1,2 @@
-$("#new-comment").html("<%= escape_javascript(render( partial: 'comments.html.erb', locals: { creator: @comment.user }))%>");
-$("#comment_title").val("");
-$("#comment_content").val("");
+$("#new-comment").html("<%= escape_javascript(render( partial: 'comments.html.erb', locals: { creator: @commenter }))%>");
+$("#comment-form").html("<%= escape_javascript(render( partial: 'comment_form.html.erb', locals: { creator: @commenter }))%>");

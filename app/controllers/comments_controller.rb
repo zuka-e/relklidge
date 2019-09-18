@@ -5,6 +5,8 @@ class CommentsController < ApplicationController
     @comment.post_id = params[:post_id].to_i
     if @comment.save
       @post = Post.find_by(id: params[:post_id])
+      @commenter = @comment.user
+      @comment = Comment.new # 初期化
       respond_to do |format|
 				format.html { redirect_back(fallback_location: params[:stored_url]) }
 				format.js
@@ -18,6 +20,8 @@ class CommentsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     if params[:comment].present?
       @comment.update(comment_params)
+      @commenter = @comment.user
+      @comment = Comment.new # 初期化
       respond_to do |format|
         format.html { redirect_back(fallback_location: params[:stored_url]) }
         format.js { render 'create' }
