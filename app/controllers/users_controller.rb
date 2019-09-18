@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  def show # お気に入り登録
+  def show
     @user = User.find(params[:id])
     @posts_with_tag = Post.joins(:tags).where("tags.name = ? AND is_open = ?", params[:tag], true).page(params[:page])
     liked_posts_ids = Like.joins(:user).group(:post_id).where("users.id = ?", params[:id]).pluck(:post_id)
@@ -25,8 +25,28 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
   def update
+    @user = User.find(params[:id])
+    if params[:user][:password].present?
+      if @user.authenticate(params[:user][:current_password])
+        @user.update(user_params)
+        flash[:success] = "登録情報を更新しました"
+        redirect_to @user
+      else
+        flash.now[:danger] = "登録情報が更新されませんでした"
+        render 'edit'
+      end
+    else
+      if @user.update(user_params)
+        flash[:success] = "登録情報を更新しました"
+        redirect_to @user
+      else
+        flash.now[:danger] = "登録情報が更新されませんでした"
+        render 'edit'
+      end
+    end
   end
 
   def withdrawal
