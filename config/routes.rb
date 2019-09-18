@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:new, :create, :show, :edit, :update] do
     resources :posts, only: [:create, :show, :update, :destroy] do
       resources :comments, only: [:create, :update, :destroy]
+      resources :likes, only: [:create, :destroy]
     end
   end
   resources :posts, only: [:index, :new]
@@ -22,7 +23,6 @@ Rails.application.routes.draw do
       resources :items, only: [:show]
     end
   end
-  resources :likes, only: [:create, :destroy]
   resources :tags, only: [:index, :create]
   resources :favorite_tags, only: [:create, :destroy]
   resources :post_tags, only: [:create, :destroy]
