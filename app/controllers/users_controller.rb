@@ -14,14 +14,13 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
-    @posts_with_tag = Post.joins(:tags).where("tags.name = ? AND is_open = ?", params[:tag], true).page(params[:page])
-    liked_posts_ids = Like.joins(:user).group(:post_id).where("users.id = ?", params[:id]).pluck(:post_id)
-    @liked_posts = Post.where("id IN (?) AND is_open = ?", liked_posts_ids, true).page(params[:page])
-    commented_posts_ids = Comment.joins(:user).group(:post_id).where("users.id = ?", params[:id]).pluck(:post_id)
-    @commented_posts = Post.where("id IN (?) AND is_open = ?", commented_posts_ids, true).page(params[:page])
-    @user_posts = Post.where("user_id = ? AND is_open = ?", params[:id], true).page(params[:page])
-    favorite_tags_ids = FavoriteTag.where("user_id = ?", params[:id]).pluck(:tag_id)
-    @favorite_tags = Tag.find(favorite_tags_ids)
+    @user_posts = @user.posts.page(params[:page])
+    @liked_posts = @user.liked_posts.page(params[:page])
+    @commented_posts = @user.commented_posts.group(:post_id).page(params[:page])
+    # ランダムに選んだお気に入りタグの投稿をおすすめとする
+    number = (0...@user.tags.count).to_a.sample
+    @recommended_posts =  @user.tags[number].posts.page(params[:page])
+    @favorite_tags = @user.tags.uniq
   end
 
   def edit
@@ -67,4 +66,5 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password,:password_confirmation)
   end
+
 end
