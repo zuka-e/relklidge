@@ -1,7 +1,8 @@
 <% provide(:title, 'このサイトについて') %>
 <div class="basic-page row">
   <div class="col-sm-8 col-sm-offset-2 col-xs-12">
-    <h1>Relklidgeへようこそ</h1>
+    <article class="article-box">
+      <h1>Relklidgeへようこそ</h1>
       <p class="alert alert-info">当サイトご利用前に、以下をご確認ください。</p>
       <section>
         <h2>Relklidgeとは</h2>
@@ -19,5 +20,6 @@
         <%= link_to "登録", signup_path, class:"btn btn-success lef-btn" %>
         <%= link_to "ログイン", login_path, class:"btn btn-info right-btn" %>
       </div>
+    </article>
   </div>
 </div>

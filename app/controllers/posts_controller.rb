@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
   def index
     if params[:tag].present?
-      @posts = Post.joins(:tags).where("tags.name = ? AND is_open = ?", params[:tag], true).page(params[:page])
+      @posts = Post.joins(:tags).where("tags.name = ?", params[:tag]).page(params[:page])
     elsif params[:user].present?
-      @posts = Post.joins(:user).where("users.name = ? AND is_open = ?", params[:user], true).page(params[:page])
+      @posts = Post.joins(:user).where("users.name = ?", params[:user]).page(params[:page])
     else
-      @posts = Post.where(is_open: true).page(params[:page])
+      @posts = Post.page(params[:page])
     end
     @categories = Category.all
     # group 重複まとめ, Arel.sql() 対injection, count() postの多い順(order用), pluck post_idのみ出力
@@ -15,9 +15,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post_tags_ids = PostTag.where("post_id = ?", @post.id).pluck(:tag_id)
     @tag = Tag.new
-    @valid_tags = Tag.where.not("name = ?", "削除済タグ")
   end
   def create
     @post = Post.new(post_params)
@@ -33,7 +31,6 @@ class PostsController < ApplicationController
       redirect_to [@post.user, @post]
     else
       flash.now[:danger] = '保存されていません'
-      @valid_tags = Tag.where.not("name = ?", "削除済タグ")
       render 'new'
     end
   end

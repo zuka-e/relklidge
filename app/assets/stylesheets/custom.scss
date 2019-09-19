@@ -70,7 +70,7 @@ html body {
     color: forestgreen;
   }
   .glyphicon-pencil:before {
-    color: cornflowerblue;
+    color: chocolate;
   }
   .glyphicon-comment:before {
     color: dodgerblue;
@@ -104,7 +104,6 @@ html body {
     }
   }
 }
-
 .select-actions {
   margin-top: 50px;
   margin-bottom: 30px;
@@ -122,16 +121,22 @@ html body {
     right: 5%;
   }
 }
-
 #logo {
   color: #fff;
   font-size: 30px;
 }
-
 .navbar-footer {
   text-align: center;
 }
-
+// HOMEページ
+.menu .select-actions {
+  margin-top: 65px;
+  height: 50px;
+  .btn {
+    padding: 15px 12px;
+    font-size: 23px;
+  }
+}
 // 退会ページ
 .alert-form {
   ul {
@@ -155,6 +160,8 @@ html body {
   .list-header {
     background: yellowgreen;
     color: #fff;
+    // background: #f5ead5;
+    // color: #d04d00;
     font-size: 1.5em;
     text-align: center;
     border-bottom-right-radius: unset;
@@ -251,12 +258,16 @@ html body {
 // タグ一覧
 .tag-index {
   display: inline-block;
-  margin: 0 5px 10px 0;
-  padding: 7px 9px;
-  font-size: 1.5em;
-  background: #fff8b6;
-  border-radius: 10px;
+  .btn {
+    padding: 3px 2px;
+    font-size: 12px;
+  }
   .char-area {
+    display: inline-block;
+    margin: 0 5px 10px 0;
+    padding: 1px 7px;
+    background: #fff8b6;
+    border-radius: 5px;
     white-space: nowrap;
   }
   .badge {
@@ -287,8 +298,8 @@ html body {
 .article-box {
   background: #fff;
   border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 4% 5%;
+  border-radius: 5px;
+  padding: 4% 5% 7% 5%;
   .times {
     font-size: 0.8em;
     color: dimgray;
@@ -345,6 +356,7 @@ html body {
     }
   }
 }
+// 一覧ページ(table)
 .basic-page .table > {
   thead > tr {
     .t-number {
@@ -378,6 +390,7 @@ html body {
   }
 }
 
+// マイページ
 .basic-page aside .profile {
   .profile-image {
     margin-right: 0px;

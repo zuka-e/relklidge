@@ -1,7 +1,8 @@
 <% provide(:title, 'FAQ') %>
 <div class="basic-page row">
   <div class="col-sm-8 col-sm-offset-2 col-xs-12">
-    <h1>よくある質問</h1>
+    <article class="article-box">
+      <h1>よくある質問</h1>
       <section>
         <h2>会員登録は必要ですか</h2>
           <p>サイトの閲覧は登録不要でご利用いただけます。解説文の投稿、また、他の利用者の投稿にいいね、コメントをする際には登録が必要となります。</p>
@@ -12,5 +13,6 @@
           <p><%= link_to 'こちらのページ(ログインが必要です)', login_path %> から退会することができます。</p>
         <% end %>
       </section>
+    </article>
   </div>
 </div>

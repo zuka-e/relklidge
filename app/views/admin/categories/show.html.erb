@@ -1,8 +1,8 @@
-<% provide(:title, 'コンテンツ')%>
+<% provide(:title, @category.name)%>
 <div class="basic-page row">
   <div class="col-sm-12 col-sm-offset-0 col-xs-12">
     <article class="article-box">
-    <h1>コンテンツ</h1>
+    <h1><%= @category.name %></h1>
       <aside>
         <div class="field profile text-center">
           <%= attachment_image_tag @category,
@@ -14,7 +14,7 @@
       </aside>
       <section>
         <ul class="list-group">
-          <li class="list-group-item list-header"><%= @category.name %></li>
+          <li class="list-group-item list-header">区分</li>
           <% @category.sections.each do |section| %>
             <li class="list-group-item"><%= section.name %></li>
             <% section.items.each do |item| %>

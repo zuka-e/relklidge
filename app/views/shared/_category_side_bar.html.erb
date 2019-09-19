@@ -1,0 +1,11 @@
+<ul class="list-group vertical-group">
+  <li class="list-group-item list-header">カテゴリー</li>
+    <% categories.each do |category| %>
+      <%= link_to  category_path(category) do %>
+        <li class="list-group-item middle-item">
+          <%= category.name %>
+        </li>
+      <% end %>
+    <% end %>
+  <li class="list-group-item last-item"></li>
+</ul>

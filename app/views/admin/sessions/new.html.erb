@@ -1,29 +1,24 @@
 <% provide(:title, "ログイン") %>
 <div class="basic-page row">
   <div class="col-md-6 col-md-offset-3">
-    <h1>管理者ログイン</h1>
-    <%= form_for(:session, url: admin_login_path) do |f| %>
-      <p class="alert alert-info">空欄を全てご記入の上、ログインボタンを押してください。</p>
-
-      <div class="form-box">
-
+    <article class="article-box">
+      <h1>管理者ログイン</h1>
+      <%= form_for(:session, url: admin_login_path) do |f| %>
+        <p class="alert alert-info">空欄を全てご記入の上、ログインボタンを押してください。</p>
         <div class="field">
           <%= f.label :email, "メールアドレス" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email",
           placeholder: 'メールアドレス:', class: 'form-control'%>
         </div>
-
         <div class="field">
           <%= f.label :password, "パスワード" %>
           <%= f.password_field :password, autocomplete: "current-password",
           placeholder: '8文字以上', class: 'form-control' %>
         </div>
-
         <div class="actions">
           <%= f.submit "ログイン", class:"btn btn-info btn-block" %>
         </div>
-
-      </div>
-    <% end %>
+      <% end %>
+    </article>
   </div>
 </div>

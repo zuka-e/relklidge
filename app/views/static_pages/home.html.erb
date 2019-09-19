@@ -2,47 +2,14 @@
 <div class="basic-page row">
   <div class="col-sm-3 col-xs-0 side-bar">
     <aside>
-      <ul class="list-group vertical-group">
-      <li class="list-group-item list-header">カテゴリー</li>
-        <% @categories.each do |category| %>
-          <%= link_to  category_path(category) do %>
-            <li class="list-group-item middle-item">
-              <%= category.name %>
-            </li>
-          <% end %>
-        <% end %>
-        <li class="list-group-item last-item"></li>
-      </ul>
+      <%= render partial: 'shared/category_side_bar', locals: { categories: @categories } %>
       <%= render 'shared/tag_side_bar' %>
     </aside>
   </div>
   <div class="col-sm-6 col-xs-12 index">
-  <div class="list-group">
-    <span class="list-group-item list-header">最近の投稿</span>
-  </div>
-    <% @posts.each do |post| %>
-      <div class="list-group">
-        <%= link_to user_post_path(post.user_id, post), class: "list-group-item middle-item" do %>
-          <h3 class="list-group-item-heading">
-            <%= attachment_image_tag post.user, :image, :fill, 50, 50, format: 'jpg', fallback: "/no_image.jpg", size:'50x50'%>
-            <%= post.title %>
-          </h3>
-          <span class="list-group-item-text"><%= "#{ post.created_at.strftime('%Y/%m/%d %H:%M') }___"%>
-          <span class="glyphicon glyphicon-thumbs-up"><%= post.likes.count %></span>
-          <span class="glyphicon glyphicon-comment"><%= post.comments.count %></span>
-          <span class="glyphicon glyphicon-tags">
-            <% post.tags.each do |tag| %>
-            <%= tag.name %>
-            <% end %>
-          </span>
-          </span>
-          <p class="list-group-item-text"><%= post.content[0..139] %><% if post.content.length > 141 %> ...<% end %></p>
-        <% end %>
-      </div>
-    <% end %>
-    <div class="text-center">
-      <%= paginate @posts, class: "paginate" %>
-    </div>
+    <article>
+      <%= render partial: 'posts/posts', locals: { posts: @posts, title: "最近の投稿" } %>
+    </article>
   </div>
   <div class="col-sm-3 col-xs-12 index">
     <aside>

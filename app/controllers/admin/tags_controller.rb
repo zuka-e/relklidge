@@ -4,8 +4,10 @@ class Admin::TagsController < ApplicationController
   end
   def destroy
     tag = Tag.find(params[:id])
-    if tag.update(name: '削除済タグ')
-      flash[:danger] = "'削除済タグ'に変更しました"
+    # if tag.update(name: '削除済タグ')
+    #   flash[:danger] = "'削除済タグ'に変更しました"
+    if tag.destroy
+      flash[:danger] = "タグを削除しました"
       redirect_to admin_tags_url
     end
   end

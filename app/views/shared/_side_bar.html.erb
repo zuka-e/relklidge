@@ -1,6 +1,6 @@
 <ul class="list-group">
   <li class="list-group-item list-header">項目一覧</li>
-  <% @sections.each do |section| %>
+  <% sections.each do |section| %>
     <li class="list-group-item"><%= section.name %></li>
     <% section.items.each do |item| %>
       <li class="list-group-item middle-item under-section">
