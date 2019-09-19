@@ -1,13 +1,14 @@
 html body {
   background-color: snow;
 }
-
+.container {
+  padding-bottom: 100px;
+}
 .clearfix::after {
   content: "";
   display: block;
   clear: both;
 }
-
 #error_explanation {
   color: red;
   ul {
@@ -105,9 +106,10 @@ html body {
 }
 
 .select-actions {
-  margin: 50px auto;
+  margin-top: 50px;
+  margin-bottom: 30px;
   position: relative;
-  height: fit-content;
+  height: 25px;
   .btn {
     width: 40%;
   }
@@ -286,7 +288,7 @@ html body {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 4% 3%;
+  padding: 4% 5%;
   .times {
     font-size: 0.8em;
     color: dimgray;

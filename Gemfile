@@ -77,3 +77,5 @@ gem "refile-mini_magick"
 
 gem 'bootstrap-sass',          '3.3.7'
 gem 'jquery-rails',            '4.3.1'
+
+gem 'cocoon'

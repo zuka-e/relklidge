@@ -1,0 +1,14 @@
+<div class='nested-fields'>
+  <div class="fields">
+    <div class="item">
+      <li>
+        <%= f.label :name, '項目' , class: "section-label"%>
+        <div class="field">
+          <%= f.text_field :name, placeholder: '項目名', class: "form-control" %>
+          <%= f.text_area :content, placeholder: '説明文', class: "form-control", style: "height: 200px;" %>
+          <%= link_to_remove_association "項目を削除", f, class: "btn btn-danger", style: "position: absolute; right: 0; top: 0;" %>
+        </div>
+      </li>
+    </div>
+  </div>
+</div>

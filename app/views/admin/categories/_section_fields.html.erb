@@ -1,0 +1,23 @@
+<div class='nested-fields'>
+  <div class="fields">
+    <div class="section" style="margin-bottom: 50px; position: relative;">
+      <div class="field">
+        <%= f.label :name, '区分' , class: "section-label"%>
+        <%= f.text_field :name, placeholder: '区分名', class: "form-control" %>
+        <%= f.text_area :content, placeholder: '説明文', class: "form-control", style: "height: 200px;" %>
+      </div>
+      <ol>
+        <%= f.fields_for :items do |item| %>
+          <%= render 'item_fields', :f => item%>
+        <% end %>
+        <div class='links' style="text-align: right; margin-top: -30px;">
+          <%= link_to_add_association '項目を追加', f, :items, class: "btn btn-success" %>
+        </div>
+      </ol>
+      <div>
+        <%= link_to_remove_association "区分を削除", f, data: { confirm: "この区分に含まれる項目も全て削除されます" },
+         class: "btn btn-danger", style: "position: absolute; right: 0; top: 25px;" %>
+      </div>
+    </div>
+  </div>
+</div>

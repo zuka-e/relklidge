@@ -1,0 +1,21 @@
+<%= form_for [:admin, @category] do |category| %>
+  <%= render "shared/error_messages", object: category.object %>
+
+  <div class="field">
+    <%= category.label :name, "分類" %>
+    <%= category.text_field :name, placeholder: '分類名', class: "form-control" %>
+    <%= category.text_area :content, placeholder: '説明文', class: "form-control", style: "height: 200px;" %>
+  </div>
+  <div class="field">
+    <%= render 'form',:f => category %>
+  </div>
+  <div class="field">
+    <%= category.label :image, 'イメージ画像' %>
+    <%= category.attachment_field :image %>
+    <%= attachment_image_tag @category, :image, :fill, 200, 200, format: 'jpeg', fallback: "/no_image.jpg", size:'200x200' %>
+  </div>
+  <div class="select-actions">
+    <%= category.submit "登録", data: { confirm: '保存します' }, class:"btn btn-info left-btn" %>
+    <%= link_to 'キャンセル', admin_root_path, data: { confirm: '編集内容は破棄されます' }, class:"btn btn-danger right-btn" %>
+  </div>
+<% end %>

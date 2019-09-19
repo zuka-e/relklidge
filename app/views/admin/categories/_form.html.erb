@@ -1,0 +1,10 @@
+<div class='nested-fields'>
+  <div class="fields">
+    <%= f.fields_for :sections do |section| %>
+      <%= render 'section_fields', :f => section %>
+    <% end %>
+    <div class='links' style="text-align: right; margin-top: -30px;">
+      <%= link_to_add_association '区分を追加', f, :sections, class: "btn btn-success btn-block" %>
+    </div>
+  </div>
+</div>

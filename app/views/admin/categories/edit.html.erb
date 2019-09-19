@@ -1,2 +1,9 @@
-<h1>Admin::Categories#edit</h1>
-<p>Find me in app/views/admin/categories/edit.html.erb</p>
+<% provide(:title, 'コンテンツ編集')%>
+<div class="basic-page row">
+  <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+    <article class="article-box">
+      <h1>コンテンツ編集</h1>
+      <%= render "content_form"%>
+    </article>
+  </div>
+</div>
