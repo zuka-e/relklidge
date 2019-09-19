@@ -20,7 +20,16 @@ class Admin::CategoriesController < ApplicationController
   end
   def edit
     @category = Category.find(params[:id])
-	end
+  end
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      flash[:success] = '変更が保存されました'
+      redirect_to [:admin, @category]
+    else
+      render 'show'
+    end
+  end
 
   private
 

@@ -1,2 +1,31 @@
-<h1>Items#show</h1>
-<p>Find me in app/views/items/show.html.erb</p>
+<% provide(:title, @item.name)%>
+<div class="basic-page row">
+  <div class="col-sm-3 col-xs-0">
+    <aside>
+      <%= render  partial: 'shared/side_bar', locals: { sections: @sections } %>
+    </aside>
+  </div>
+  <div class="col-sm-9 col-xs-12">
+    <article class="article-box">
+      <section>
+        <div class="field">
+          <h1><%= @item.name %></h1>
+        </div>
+        <div class="field">
+          <span class="glyphicon glyphicon-tags"></span>
+          <% @item.tags.each do |tag| %>
+            <%= link_to posts_path( tag: tag.name ), class:"tag-index" do %>
+              <div class="char-area"><%= tag.name %></div>
+            <% end %>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= @item.content %>
+        </div>
+      </section>
+    </article>
+    <article>
+      <%= render partial: 'posts/posts', locals: { posts: @posts, title: "関連投稿" } %>
+    <article>
+  </div>
+</div>
