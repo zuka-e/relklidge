@@ -1,2 +1,63 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<% provide(:title, "@#{ @user.name }")%>
+<div class="basic-page row">
+  <div class="col-sm-3 col-xs-0 side-bar">
+    <aside>
+      <div class="profile">
+        <%= attachment_image_tag @user,
+        :image, :fill, 150, 150, format: 'jpg',
+        fallback: "/no_image.jpg",
+        class: "profile-image" %>
+        <table class="table table-bordered table-condensed">
+          <thead><tr><th><%= label_tag @user, 'ユーザ名' %></th></tr></thead>
+          <tbody><tr><td><%= @user.name %></td></tr></tbody>
+          <thead><tr><th><%= label_tag @user, 'メールアドレス' %></th></tr></thead>
+          <tbody><tr><td><%= @user.email %></td></tr></tbody>
+        </table>
+      </div>
+      <%= link_to '退会させる', admin_admin_quit_path(@user),
+        method: :patch, data: { confirm: "本当に退会させますか？" },
+        class: "btn btn-danger btn-block" %>
+    </aside>
+  </div>
+  <div class="col-sm-6 col-xs-12 index">
+    <ul id="posts-tab" class="nav nav-tabs">
+      <li class="active"><a href="#user-posts" data-toggle="tab">ユーザ投稿</a></li>
+      <li><a href="#liked-posts" data-toggle="tab">いいねした投稿</a></li>
+      <li><a href="#commented-posts" data-toggle="tab">コメントした投稿</a></li>
+      <li><a href="#posts-with-tag" data-toggle="tab">おすすめ投稿</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="list-group tab-pane active" id="user-posts">
+        <%= render partial: 'users/posts', locals: { posts: @user_posts } %>
+      </div>
+      <div class="list-group tab-pane" id="liked-posts">
+        <%= render partial: 'users/posts', locals: { posts: @liked_posts } %>
+      </div>
+      <div class="list-group tab-pane" id="commented-posts">
+        <%= render partial: 'users/posts', locals: { posts: @commented_posts } %>
+      </div>
+      <div class="list-group tab-pane" id="posts-with-tag">
+        <%= render partial: 'users/posts', locals: { posts: @recommended_posts} %>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-3 col-xs-0 side-bar">
+    <aside>
+      <ul class="list-group">
+        <li class="list-group-item list-header">お気に入りタグ</li>
+        <li class="list-group-item middle-item">
+          <%= link_to 'タグ一覧を見る', tags_path, class: "btn btn-info btn-block" %>
+        </li>
+        <% @favorite_tags.each do |tag| %>
+          <%= link_to posts_path( tag: tag.name ) do %>
+            <li class="list-group-item middle-item">
+              <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+            </li>
+          <% end %>
+        <% end %>
+        <li class="list-group-item last-item"></li>
+      </ul>
+    </aside>
+  </div>
+
+</div>
