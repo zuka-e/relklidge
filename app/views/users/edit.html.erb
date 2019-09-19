@@ -29,6 +29,11 @@
           <%= f.password_field :password_confirmation, autocomplete: "current-password",
           placeholder: '上記と同じパスワード', class: 'form-control' %>
         </div>
+        <div class="field">
+          <%= f.label :image, 'プロフィール画像' %>
+          <%= f.attachment_field :image %>
+          <%= attachment_image_tag @user, :image, :fill, 150, 150, format: 'jpg', fallback: "/no_image.jpg", size:'150x150' %>
+        </div>
         <div class="actions">
           <%= f.submit "登録", data: { confirm: 'この情報で登録します' }, class:"btn btn-success btn-block only-btn" %>
         </div>
