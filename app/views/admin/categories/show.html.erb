@@ -1,0 +1,31 @@
+<% provide(:title, 'コンテンツ')%>
+<div class="basic-page row">
+  <div class="col-sm-12 col-sm-offset-0 col-xs-12">
+    <article class="article-box">
+    <h1>コンテンツ</h1>
+      <aside>
+        <div class="field profile text-center">
+          <%= attachment_image_tag @category,
+          :image, :fill, 150, 150, format: 'jpg',
+          fallback: "/no_image.jpg",
+          class: "profile-image",
+          style: "width: auto" %>
+        </div>
+      </aside>
+      <section>
+        <ul class="list-group">
+          <li class="list-group-item list-header"><%= @category.name %></li>
+          <% @category.sections.each do |section| %>
+            <li class="list-group-item"><%= section.name %></li>
+            <% section.items.each do |item| %>
+              <li class="list-group-item middle-item under-section">
+                <%= link_to item.name, admin_category_section_item_path(section.category.id,section.id,item.id) %>
+              </li>
+            <% end %>
+          <% end %>
+          <li class="list-group-item last-item"></li>
+        </ul>
+      </section>
+    </article>
+  </div>
+</div>
