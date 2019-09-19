@@ -1,0 +1,1 @@
+$(`#tag-<%= @item_tag.id %>`).html("<%= escape_javascript(render( partial: 'favorite_tags/tags', locals: { tag:@item_tag } ))%>");

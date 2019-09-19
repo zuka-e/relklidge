@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'items/show'
   root                'static_pages#home'
   get    'help'    => 'static_pages#help'
   get    'about'   => 'static_pages#about'
@@ -42,8 +41,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:index]
     patch '/users/:id/withdrawal', to: 'users#quit', as: 'admin_quit'
     resources :categories do
-      resources :sections, only: [:create, :show, :update, :destroy] do
-        resources :items, only: [:create, :show, :update, :destroy]
+      resources :sections, only: [] do
+        resources :items, only: [:show, :edit, :update, :destroy]
       end
     end
     resources :tags, only: [:index, :create, :update, :destroy]

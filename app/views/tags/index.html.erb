@@ -1,14 +1,13 @@
 <% provide(:title, "タグ")%>
 <div class="row basic-page">
 	<div class="col-sm-12 col-xs-12 clearfix">
-    <% @tags.each do |tag| %>
-      <div class="tag-index">
-
-          <div class="char-area" id="tag-<%= tag.id %>">
-            <%= render partial: 'favorite_tags/tags', locals: { tag: tag } %>
-          </div>
-
-      </div>
-    <% end %>
+  <h1>タグ一覧</h1>
+    <div class="tag-index">
+      <% @tags.each do |tag| %>
+        <div class="char-area" id="tag-<%= tag.id %>">
+          <%= render partial: 'favorite_tags/tags', locals: { tag: tag } %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

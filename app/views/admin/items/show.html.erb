@@ -1,0 +1,32 @@
+<% provide(:title, @item.name)%>
+<div class="basic-page row">
+  <div class="col-sm-3 col-xs-0">
+    <aside>
+      <%= render  partial: 'shared/side_bar', locals: { sections: @sections } %>
+    </aside>
+  </div>
+  <div class="col-sm-9 col-xs-12">
+    <article class="article-box">
+      <div class="field">
+        <h1><%= @item.name %></h1>
+        <%= link_to '編集', edit_admin_category_section_item_path(
+            params[:category_id], params[:section_id], @item ),
+            class: "btn btn-info in-field", style: "position: absolute; right: 0; top: 0;" %>
+      </div>
+      <div class="field">
+        <span class="glyphicon glyphicon-tags"></span>
+        <% @item.tags.each do |tag| %>
+          <%= link_to posts_path( tag: tag.name ), class:"tag-index" do %>
+            <div class="char-area"><%= tag.name %></div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="field">
+        <%= @item.content %>
+      </div>
+    </article>
+    <article>
+      <%= render partial: 'posts/posts', locals: { posts: @posts, title: "関連投稿" } %>
+    <article>
+  </div>
+</div>

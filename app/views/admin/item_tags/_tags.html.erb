@@ -1,0 +1,9 @@
+<%= link_to admin_posts_path( tag: tag.name ) do %>
+  <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+<% end %>
+  <% if tag.related_to_item?(item) %>
+    <%= button_to '削除', admin_item_tag_path(item.item_tags.find_by(tag_id: tag.id), item_id: item.id, tag_id: tag.id),
+      class: "btn btn-danger", method: :delete, remote: true %>
+  <% else %>
+    <%= button_to '追加', admin_item_tags_path(item_id: item.id, tag_id: tag.id), class: "btn btn-success", remote: true %>
+  <% end %>
