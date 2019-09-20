@@ -12,7 +12,7 @@
         <span class="glyphicon glyphicon-thumbs-up"><%= post.likes.count %></span>
         <span class="glyphicon glyphicon-comment"><%= post.comments.count %></span>
         <span class="glyphicon glyphicon-tags">
-          <% post.tags.each do |tag| %><%= tag.name %><% end %>
+          <% post.tags.each do |tag| %><%= "#{ tag.name } " %><% end %>
         </span>
       </span>
       <p class="list-group-item-text"><%= post.content[0..139] %><% if post.content.length > 141 %> ...<% end %></p>

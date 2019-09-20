@@ -9,21 +9,26 @@
       </button>
       <%= link_to 'Relklidge', root_path, id:"logo" %>
     </div>
-    <div class="collapse navbar-collapse" id="navbarEexample7">
+    <div class="collapse navbar-collapse basic-nav" id="navbarEexample7">
+      <% if log_in? %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to '分類一覧', categories_path, class: "glyphicon glyphicon-list" %></li>
+          <li><%= link_to '新規投稿', new_post_path, class: "glyphicon glyphicon-pencil" %></li>
+          <li><%= link_to '投稿一覧', posts_path, class: "glyphicon glyphicon-file" %></li>
+          <li><%= link_to 'タグ一覧', tags_path, class: "glyphicon glyphicon-tags" %></li>
+        </ul>
+      <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to 'Home',root_path,class:"glyphicon glyphicon-home";%></li>
-        <!-- <%# if logged_in? %>
-          <li><%= link_to ' Users',users_path,class:"glyphicon glyphicon-user";%></li>
-          <li><%= link_to ' Posts',posts_path,class:"glyphicon glyphicon-book";%></li>
-          <li>
-            <%= link_to ' Log out',logout_path,method: :delete,data:{ confirm: 'Are you sure to logout?'},class:"glyphicon glyphicon-log-out";%>
-          </li>
+        <% if log_in? %>
+          <li><%= link_to 'マイページ',user_path(current_user),class:"glyphicon glyphicon-user";%></li>
+          <li><%= link_to 'ログアウト',logout_path, method: :delete, class:"glyphicon glyphicon-log-out";%></li>
         <% else%>
-          <li><%= link_to ' About',about_path,class:"glyphicon glyphicon-link";%></li>
-          <li><%= link_to ' Sign up',signup_path,class:"glyphicon glyphicon-edit sign-up";%></li>
-          <li><%= link_to ' Log in',login_path,class:"glyphicon glyphicon-log-in";%></li>
-        <% end % >-->
+          <li><%= link_to '新規登録', signup_path,class:"glyphicon glyphicon-star";%></li>
+          <li><%= link_to 'ログイン',login_path,class:"glyphicon glyphicon-log-in";%></li>
+        <% end %>
       </ul>
     </div>
   </div>
 </nav>
+
+

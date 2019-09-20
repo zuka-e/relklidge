@@ -20,7 +20,7 @@
           <% if  log_in? %>
             <%= render partial: 'comments/comment_form', locals: { creator: current_user } %>
           <% else %>
-            <%= link_to '投稿する(ログイン)', login_path, class: 'btn btn-info' %>
+            <%= link_to '投稿する(ログイン)', login_path, class: 'btn btn-info', style: "margin-top: 20px" %>
           <% end %>
         </div>
       </div>

@@ -7,7 +7,7 @@
     <%= render 'layouts/shim' %>
   </head>
   <body>
-    <% if request.fullpath.match?(/^\/admins\/*/) %>
+    <% if request.fullpath.match?(/^\/admin\/*/) %>
       <%= render "/layouts/admins_header" %>
     <% else %>
       <%= render "/layouts/users_header" %>

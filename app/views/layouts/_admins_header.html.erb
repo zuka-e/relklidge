@@ -1,0 +1,33 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarEexample7">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to 'Relklidge', admin_root_path, id:"logo" %>
+    </div>
+    <div class="collapse navbar-collapse basic-nav" id="navbarEexample7">
+      <% if admin_log_in? %>
+        <ul class="nav navbar-nav">
+          <li><%= link_to '新規登録', new_admin_category_path, class: "glyphicon glyphicon-edit" %></li>
+          <li><%= link_to '分類一覧', admin_categories_path, class: "glyphicon glyphicon-list" %></li>
+          <li><%= link_to '新規投稿', new_admin_post_path, class: "glyphicon glyphicon-pencil" %></li>
+          <li><%= link_to '投稿一覧', admin_posts_path, class: "glyphicon glyphicon-file" %></li>
+          <li><%= link_to 'ユーザ一覧', admin_users_path, class: "glyphicon glyphicon-user" %></li>
+          <li><%= link_to 'タグ一覧', admin_tags_path, class: "glyphicon glyphicon-tags" %></li>
+          <li><%= link_to 'コメント一覧', admin_comments_path, class: "glyphicon glyphicon-comment" %></li>
+        </ul>
+      <% end %>
+      <ul class="nav navbar-nav navbar-right">
+        <% if admin_log_in? %>
+          <li><%= link_to 'ログアウト',admin_logout_path,class:"glyphicon glyphicon-log-out";%></li>
+        <% else%>
+          <li><%= link_to 'ログイン',admin_login_path,class:"glyphicon glyphicon-log-in";%></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>

@@ -20,7 +20,17 @@ html body {
     }
   }
 }
-
+.basic-nav {
+  ul.nav.navbar-nav {
+    margin: 0 20px;
+  }
+  .glyphicon {
+    padding-right: 5px;
+    &:before {
+      margin-right: 5px;
+    }
+  }
+}
 .basic-page {
   margin-top: 50px;
   margin-bottom: 70px;

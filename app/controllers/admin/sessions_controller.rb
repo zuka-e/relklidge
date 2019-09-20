@@ -13,4 +13,12 @@ class Admin::SessionsController < ApplicationController
       render 'new'
     end
   end
+  def destroy
+    if admin_log_in?
+      session.delete(:admin_id)
+      @current_admin = nil
+      redirect_to root_url
+    end
+  end
+
 end
