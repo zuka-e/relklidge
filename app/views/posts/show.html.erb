@@ -18,7 +18,9 @@
         </div>
         <div id="comment-form">
           <% if  log_in? %>
-            <%= render partial: 'comments/comment_form', locals: { creator: current_user } %>
+            <%  if @post.is_open == true %>
+              <%= render partial: 'comments/comment_form', locals: { creator: current_user } %>
+            <% end %>
           <% else %>
             <%= link_to '投稿する(ログイン)', login_path, class: 'btn btn-info', style: "margin-top: 20px" %>
           <% end %>

@@ -3,7 +3,6 @@
   <%= hidden_field_tag "creator_id", creator.id %>
   <%= render 'shared/error_messages', object: f.object %>
   <div class="field">
-    <%= f.hidden_field :title, placeholder: "タイトル(任意)", class: 'form-control' %>
     <%= f.text_area :content, placeholder: "本文", class: 'form-control', style: "height:200px;" %>
   </div>
   <div class="action">

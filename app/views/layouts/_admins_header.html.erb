@@ -23,7 +23,7 @@
       <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if admin_log_in? %>
-          <li><%= link_to 'ログアウト',admin_logout_path,class:"glyphicon glyphicon-log-out";%></li>
+          <li><%= link_to 'ログアウト',admin_logout_path, method: :delete, class:"glyphicon glyphicon-log-out";%></li>
         <% else%>
           <li><%= link_to 'ログイン',admin_login_path,class:"glyphicon glyphicon-log-in";%></li>
         <% end %>

@@ -26,16 +26,24 @@
     </ul>
     <div class="tab-content">
       <div class="list-group tab-pane active" id="user-posts">
-        <%= render partial: 'posts', locals: { posts: @user_posts } %>
+        <% if !@user_posts.nil? %>
+          <%= render partial: 'posts', locals: { posts: @user_posts } %>
+        <% end %>
       </div>
       <div class="list-group tab-pane" id="liked-posts">
-        <%= render partial: 'posts', locals: { posts: @liked_posts } %>
+        <% if !@liked_posts.nil? %>
+          <%= render partial: 'posts', locals: { posts: @liked_posts } %>
+        <% end %>
       </div>
       <div class="list-group tab-pane" id="commented-posts">
-        <%= render partial: 'posts', locals: { posts: @commented_posts } %>
+        <% if !@commented_posts.nil? %>
+          <%= render partial: 'posts', locals: { posts: @commented_posts } %>
+        <% end %>
       </div>
       <div class="list-group tab-pane" id="posts-with-tag">
-        <%= render partial: 'posts', locals: { posts: @recommended_posts} %>
+        <% if !@recommended_posts.nil? %>
+          <%= render partial: 'posts', locals: { posts: @recommended_posts} %>
+        <% end %>
       </div>
     </div>
   </div>
