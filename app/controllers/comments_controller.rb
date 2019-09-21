@@ -1,4 +1,8 @@
 class CommentsController < ApplicationController
+
+  before_action :log_in_request, only: [:create, :update, :destroy]
+  before_action :authenticate_user, only: [:create, :update, :destroy]
+
   def create
     @comment = Comment.new(comment_params)
     @comment.user_id = params[:creator_id].to_i
@@ -45,6 +49,21 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:title, :content)
+  end
+
+  def log_in_request
+    unless log_in?
+      session[:forwarding_url] = request.original_url # ログイン時に使用
+      flash[:danger] = "ログインが必要です"
+      redirect_to login_url
+    end
+  end
+  def authenticate_user
+    @user = User.find_by(params[:user_id])
+    unless @user == current_user
+      flash[:danger] = "不正なアクセスです"
+      redirect_back(fallback_location: current_user)
+    end
   end
 
 end

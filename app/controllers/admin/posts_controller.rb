@@ -15,25 +15,19 @@ class Admin::PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @post_tags_ids = PostTag.where("post_id = ?", @post.id).pluck(:tag_id)
     @tag = Tag.new
-    @valid_tags = Tag.where.not("name = ?", "削除済タグ")
+    @tags = Tag.page(params[:page])
   end
   def create
     @post = Post.new(post_params)
     @post.user = User.first
-    @post.is_open = false unless params[:is_open]
-    if params[:new_tag] && params[:tag][:name].present?
-      @tag = Tag.create(tag_params)
-			@post.tags << @tag
-    end
+    params[:post][:is_open] == '1' ? @post.is_open = true : @post.is_open = false
     if @post.save
-      @post.tags << Tag.find(params[:post][:tags])
+      @post.post_tags.create(tag: Tag.create(tag_params))
       flash[:success] = '投稿が作成されました'
       redirect_to [:admin, @post.user, @post]
     else
-      flash.now[:danger] = '保存されていません'
-      @valid_tags = Tag.where.not("name = ?", "削除済タグ")
+      @tags = Tag.page(params[:page])
       render 'new'
     end
   end
