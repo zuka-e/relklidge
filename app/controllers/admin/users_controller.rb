@@ -1,10 +1,10 @@
 class Admin::UsersController < ApplicationController
 
   def index
+    @q = User.ransack(params[:q])
+    @users = @q.result(distinct: true).page(params[:page])
     if params[:name].present?
       @users = @users.where(["name LIKE ?", "%#{params[:name]}%"])
-    else
-      @users = User.page(params[:page])
     end
   end
 

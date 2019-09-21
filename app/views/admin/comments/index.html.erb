@@ -1,17 +1,26 @@
 <% provide(:title, "コメント一覧")%>
 <div class="row basic-page">
   <div class="col-sm-12 col-xs-12">
+    <%= search_form_for [:admin, @q] do |f| %>
+      <%= f.search_field :content_cont, placeholder: '本文' %>
+      <%= f.search_field :user_name_cont, placeholder: 'ユーザ名' %>
+      <%= f.submit %>
+  </div>
+</div>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
 		<div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th class="t-number">ID</th>
-            <th class="t-number">作成日時</th>
+            <th class="t-number"><%= sort_link(@q, :id, 'ID', default_order: :ASC) %></th>
+            <th class="t-number"><%= sort_link(@q, :created_at, '作成日時', default_order: :ASC) %></th>
             <th>コメント</th>
-            <th>ユーザ</th>
+            <th><%= sort_link(@q, :user_name, 'ユーザ', default_order: :ASC) %></th>
             <th>投稿</th>
           </tr>
         </thead>
+    <% end %> <!--ransack-->
         <tbody>
           <% @comments.each do |comment| %>
             <tr>
@@ -25,15 +34,21 @@
                 <% end %>
               </td>
               <td class="t-subject">
-                <div><%= link_to comment.post.title, admin_user_post_path(comment.post.user, comment.post) %></div>
+              <% if !comment.post.nil? %>
+                <div>
+                  <%= link_to admin_user_post_path(comment.post.user, comment.post) do %>
+                    <span class="glyphicon glyphicon-file"></span><%= comment.post.title %>
+                  <% end %>
+                </div>
                 <% comment.post.tags[0..4].each_with_index do |tag, i| %>
                   <%= link_to admin_posts_path(tag: tag.name) do %>
                     <span class="glyphicon glyphicon-tags"></span><%= tag.name %><br>
                   <% end %>
-                  <% if i == 4 && comment.post.count > 5 %>
+                  <% if i == 4 && comment.post.tags.count > 5 %>
                       <div><%= "他 #{ comment.post.tags.count - 5 }" %></div>
                   <% end %>
                 <% end %>
+              <% end %>
               </td>
             </tr>
           <%end%>

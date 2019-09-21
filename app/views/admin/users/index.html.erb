@@ -1,38 +1,52 @@
 <% provide(:title, "ユーザ一覧")%>
 <div class="row basic-page">
   <div class="col-sm-12 col-xs-12">
+    <%= search_form_for [:admin, @q] do |f| %>
+      <%= f.select :is_quit_eq,
+        options_for_select([["利用中",'0'],["退会済",'1'] ]) %>
+      <%= f.search_field :name_cont, placeholder: 'ユーザ名' %>
+      <%= f.search_field :tags_name_cont, placeholder: 'タグ名' %>
+      <%= f.submit %>
+  </div>
+</div>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
 		<div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>ユーザ</th>
-            <th>メールアドレス</th>
-            <th>投稿数<br>コメント数</th>
+            <th class="t-number"><%= sort_link(@q, :id, 'ID', default_order: :ASC) %></th>
+            <th><%= sort_link(@q, :name, 'ユーザ', default_order: :ASC) %></th>
+            <th><%= sort_link(@q, :email, 'メールアドレス', default_order: :ASC) %></th>
+            <th class="t-number">投稿</th>
+            <th class="t-number">コメント</th>
             <th>お気に入り</th>
             <th>退会<br>ステータス</th>
           </tr>
         </thead>
+    <% end %> <!--ransack-->
         <tbody>
           <% @users.each do |user| %>
             <tr>
               <td class="t-index"><%= link_to user.id, admin_user_path(user) %></td>
-              <td class="t-user">
+              <td class="t-user" style="width: 15%;>
                 <%= link_to admin_user_path(user) do %>
                   <%= attachment_image_tag user, :image, :fill, 40, 40, format: 'jpg', fallback: "/no_image.jpg", size: '40x40' %>
                   <%= user.name %>
                 <% end %>
               </td>
               <td class="t-user"><%= link_to user.email, admin_user_path(user) %></td>
-              <td class="t-number">
+              <td class="t-number" style="width: 7%;>
                 <%= link_to admin_posts_path(user: user.name) do %>
                   <span class="glyphicon glyphicon-pencil"></span><%= user.posts.count %>
-                <% end %><br>
+                <% end %>
+              </td>
+              <td class="t-number" style="width: 8%;>
                 <%= link_to admin_posts_path(commented_by: user.name) do %>
                   <span class="glyphicon glyphicon-comment"></span><%= user.comments.count %>
                 <% end %>
               </td>
-              <td class="t-content" style="width: 45%;">
+              <td class="t-content" style="width: 40%;">
                 <% user.tags[0..4].each_with_index do |tag, i| %>
                   <%= link_to admin_posts_path(tag: tag.name) do %>
                     <span class="glyphicon glyphicon-tags"></span><%= tag.name %>
@@ -42,7 +56,7 @@
                   <% end %>
                 <% end %>
               </td>
-              <td style="width: 10%;"><%= user.is_quit %></td>
+              <td style="width: 8%;"><%= user.is_quit %></td>
             </tr>
           <%end%>
         </tbody>

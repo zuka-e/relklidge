@@ -1,6 +1,7 @@
 class Admin::TagsController < ApplicationController
   def index
-    @tags = Tag.page(params[:page])
+    @q = Tag.ransack(params[:q])
+    @tags = @q.result(distinct: true).page(params[:page])
   end
   def destroy
     tag = Tag.find(params[:id])

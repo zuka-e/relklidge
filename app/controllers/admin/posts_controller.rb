@@ -1,5 +1,7 @@
 class Admin::PostsController < ApplicationController
   def index
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).page(params[:page])
     if params[:tag].present?
       @posts = Post.joins(:tags).where("tags.name = ? AND is_open = ?", params[:tag], true).page(params[:page])
     elsif params[:user].present?
@@ -7,8 +9,6 @@ class Admin::PostsController < ApplicationController
     elsif params[:commented_by].present?
       commented_posts_ids = Comment.joins(:user).group(:post_id).where("users.name = ?", params[:commented_by]).pluck(:post_id)
       @posts = Post.where("id = ? AND is_open = ?", commented_posts_ids, true).page(params[:page])
-    else
-      @posts = Post.where(is_open: true).page(params[:page])
     end
 
   end

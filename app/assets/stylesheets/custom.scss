@@ -389,6 +389,7 @@ html body {
     th,
     td {
       vertical-align: middle;
+      word-break: break-word;
     }
     .t-index {
       width: 5%;
@@ -403,11 +404,9 @@ html body {
     }
     .t-subject {
       width: 20%;
-      word-break: break-word;
     }
     .t-content {
-      width: 60%;
-      word-break: break-word;
+      width: 40%;
     }
   }
 }

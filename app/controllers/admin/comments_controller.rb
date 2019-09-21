@@ -1,5 +1,6 @@
 class Admin::CommentsController < ApplicationController
   def index
-    @comments = Comment.page(params[:page])
+    @q = Comment.ransack(params[:q])
+    @comments = @q.result(distinct: true).page(params[:page])
   end
 end

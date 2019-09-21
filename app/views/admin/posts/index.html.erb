@@ -1,18 +1,30 @@
 <% provide(:title, "投稿一覧")%>
 <div class="row basic-page">
   <div class="col-sm-12 col-xs-12">
+    <%= search_form_for [:admin, @q] do |f| %>
+      <%= f.search_field :user_name_cont, placeholder: 'ユーザ名' %>
+      <%= f.search_field :title_cont, placeholder: 'タイトル' %>
+      <%= f.search_field :content_cont, placeholder: '本文' %>
+      <%= f.search_field :tags_name_cont, placeholder: 'タグ名' %>
+      <%= f.submit %>
+  </div>
+</div>
+<div class="row basic-page">
+  <div class="col-sm-12 col-xs-12">
 		<div class="table-responsive">
       <table class="table table-striped">
         <thead>
           <tr>
-            <th class="t-number">ID</th>
-            <th>ユーザ</th>
-            <th>タイトル</th>
+            <th class="t-number"><%= sort_link(@q, :id, 'ID', default_order: :ASC) %></th>
+            <th><%= sort_link(@q, :user_name, 'ユーザ', default_order: :ASC) %></th>
+            <th><%= sort_link(@q, :title, 'タイトル', default_order: :ASC) %></th>
             <th>本文(140文字)</th>
-            <th class="t-number">いいね数<br>コメント数</th>
+            <th class="t-number">いいね</th>
+            <th class="t-number">コメント</th>
             <th>タグ</th>
           </tr>
         </thead>
+    <% end %> <!--ransack-->
         <tbody>
           <% @posts.each do |post| %>
             <tr>
@@ -25,9 +37,12 @@
               </td>
               <td class="t-suject"><%= link_to post.title, admin_user_post_path(post.user, post) %></td>
               <td class="t-content" style="width: 40%;"><%= post.content[0..139] %></td>
-              <td class="t-number">
-                <span class="glyphicon glyphicon-thumbs-up"></span><%= post.likes.count %><br>
+              <td class="t-number" style="width: 7%">
+                <span class="glyphicon glyphicon-thumbs-up"></span><%= post.likes.count %>
+              </td>
+              <td class="t-number" style="width: 8%">
                 <span class="glyphicon glyphicon-comment"></span><%= post.comments.count %>
+              </td>
               </td>
               <td class="t-suject">
                 <% post.tags[0..4].each_with_index do |tag, i| %>
