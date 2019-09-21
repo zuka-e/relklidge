@@ -15,8 +15,11 @@ Admin.create!( name: "Admin",
 )
 
 # カテゴリを生成
-categories = [["憲法","6b479db3c59fb4aaf88f81215b5e303d9d410457d0d112e9d376b5ed27b5"],["民法","0fe69738129f0875194c7f4e482c04e809581fde783f962bfb123c0b3947"]]
-categories.each { |w| Category.create!(name: w[0], content: "", image_id: w[1]) }
+categories = [
+  ["憲法","b73dcd1c333c34956a7b3921d11e3d207bde521981d8c0a9d8f62be0c08a","民定憲法として1946年（昭和21年）11月3日公布、1947年（昭和22年）5月3日施行"],
+  ["民法","c45e4c4e3b9a2318a8b553e8753f6d4c4ffe60d98b5532ee62eb63270ce2","最終更新： 令和元年六月十四日公布（令和元年法律第三十四号）改正"]
+]
+categories.each { |w| Category.create!(name: w[0], content: w[2], image_id: w[1]) }
 
 # 区分を生成
 sections1 = %w[基本的人権 平和主義 国民主権]
@@ -24,7 +27,14 @@ sections2 = %w[総則 物権 債権 相続]
 sections = [sections1, sections2]
 i = 0
 categories.count.times do |index|
-  sections[i].each { |w| Section.create!(category_id: i + 1, name: w) }
+  sections[i].each do |w|
+    Section.create!(
+      category_id: i + 1,
+      name: w,
+      content: "占有の訴えは本権の訴えを妨げず、また、本権の訴えは占有の訴えを妨げない。\n
+      占有の訴えについては、本権に関する理由に基づいて裁判をすることができない。"
+    )
+    end
   i += 1
 end
 
@@ -46,39 +56,45 @@ categories.count.times do |index|
 end
 
 # ユーザを生成
-User.create!( name: '管理者', email: 'admin@test.jp', password: 'password', password_confirmation: 'password')
+User.create!( name: '管理者', email: 'user@test.jp', password: 'password', password_confirmation: 'password')
 names = %w[Amy Bob Cyan Dim Eif Fena Gon Hon Ion John]
 names.each do |w|
   email = "#{(0...8).map{ ('A'..'Z').to_a[rand(26)] }.join}@test.com"
   password = "password"
-  is_quit = [false, true]
   User.create!( name: w,
     image_id: "",
     email: email,
     password: password,
     password_confirmation: password,
-    is_quit: is_quit.sample
+    is_quit: "利用中"
     )
 end
 
-# 投稿を生成
-Post.create!( user_id: 1, title: "True", content: "True", is_open: true )
-User.all.each do |user|
-  Post.create!( user_id: user.id,
-  title: "title-#{user.id}",
-  content: "post_content-#{user.id}" * 50,
-  writing_time: 0,
-  is_open: false
-)
-end
-
 # タグを生成
-tags = %w[憲法 民法 家庭裁判所 制限行為能力者 善意の第三者 催告 錯誤 強迫 詐欺 保存行為 代理人 取消し 無効 追認 破産 差押え 占有の訴え]
+tags = %w[憲法 民法 家庭裁判所 制限行為能力者 善意の第三者 催告 錯誤 強迫 詐欺 譲渡禁止特約
+  保存行為 代理人 取消し 無効 追認 破産 差押え 占有の訴え 住民訴訟 無権代理 制限物権]
 tags.each { |w| Tag.create!(name: w) }
+
+# 投稿を生成
+Post.create!( user_id: 1, title: "非公開投稿", content: "非公開" * 10, is_open: false )
+User.all.each do |user|
+  2.times do |index|
+    Post.create!( user_id: user.id,
+    title: tags.sample,
+    content: "所有者は、法令の制限内において、自由にその所有物の使用、収益及び処分をする権利を有する。" * 30,
+    writing_time: 0,
+    is_open: true
+  )
+  end
+end
 
 # 投稿タグを生成
 Post.all.each do |post|
-  post.tags << Tag.find(post.id)
+  PostTag.create!( post_id: post.id, tag_id: (1..20).to_a.sample )
+end
+# お気に入りタグを生成
+User.all.each do |user|
+  FavoriteTag.create!( user_id: user.id, tag_id: (1..20).to_a.sample )
 end
 
 # コメントを生成
@@ -87,8 +103,7 @@ i = 0
 User.all.each do |user|
   Comment.create!( user_id: user.id,
     post_id: order[i],
-    title: "title-#{user.id}",
-    content: "comment_content-#{user.id}" * 10,
+    content: "土地の所有権は、法令の制限内において、その土地の上下に及ぶ。" * 2,
   )
   Like.create!( user_id: user.id,
     post_id: order[i]

@@ -113,10 +113,19 @@ html body {
       margin-right: 10px;
     }
   }
+  .open_status {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #ffa85f;
+    font-size: 25px;
+    border-radius: 5px;
+    padding: 3px;
+    color: #fff;
+  }
 }
 .select-actions {
-  margin-top: 50px;
-  margin-bottom: 30px;
+  margin: 50px auto;
   position: relative;
   height: 25px;
   .btn {
@@ -176,6 +185,9 @@ html body {
     text-align: center;
     border-bottom-right-radius: unset;
     border-bottom-left-radius: unset;
+  }
+  .list-group-item-heading {
+    position: relative;
   }
   .list-group-item {
     margin-bottom: 0;
@@ -309,7 +321,7 @@ html body {
   background: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 4% 5% 7% 5%;
+  padding: 4% 5%;
   .times {
     font-size: 0.8em;
     color: dimgray;

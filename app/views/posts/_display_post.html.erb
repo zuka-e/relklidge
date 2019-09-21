@@ -1,5 +1,6 @@
 <div class="field">
   <h1><%= @post.title%></h1>
+  <% if @post.is_open == false %><div class="open_status">非公開</div><% end %>
 </div>
 <div class="field" style="margin-bottom: 50px">
   <%= link_to posts_path( user: @post.user.name ) do %>
