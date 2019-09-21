@@ -1,0 +1,9 @@
+<%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+<% if log_in? %>
+  <% if tag.related_to_post?(post) %>
+    <%= button_to '削除', post_tag_path(post.post_tags.find_by(tag_id: tag.id), post_id: post.id, tag_id: tag.id),
+    class: "btn btn-danger", method: :delete, remote: true %>
+  <% else %>
+    <%= button_to '追加', post_tags_path( post_id: post.id, tag_id: tag.id), class: "btn btn-success", remote: true %>
+  <% end %>
+<% end %>
