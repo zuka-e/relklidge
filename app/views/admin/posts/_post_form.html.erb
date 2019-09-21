@@ -27,11 +27,13 @@
       </div>
     </div>
   <% end %>
+  <% unless @post.id.nil? %>
     <div class="tag-index">
-    <% @tags.each do |tag| %>
-      <div class="char-area" id="tag-<%= tag.id %>">
-        <%= render partial: 'post_tags/post_tags', locals: { post: @post , tag: tag } %>
-      </div>
-    <% end %>
-  </div>
+      <% @tags.each do |tag| %>
+        <div class="char-area" id="tag-<%= tag.id %>">
+          <%= render partial: 'post_tags/post_tags', locals: { post: @post , tag: tag } %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 </article>
