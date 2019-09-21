@@ -7,7 +7,7 @@ class Admin::SessionsController < ApplicationController
     admin = Admin.find_by(email: params[:session][:email].downcase)
     if admin && admin.authenticate(params[:session][:password])
       session[:admin_id] = admin.id
-      redirect_to admin_root_path
+      redirect_to session[:forwarding_url] || admin_root_path
     else
       flash.now[:danger] = "メールアドレスかパスワードが正しくありません"
       render 'new'
