@@ -22,9 +22,9 @@ class Admin::UsersController < ApplicationController
   def quit
     @user = User.find(params[:id])
     @user.is_quit = true
-    @user.name[-1] = "@"
     if @user.save
-      @user.update_attribute(:email, "#{a.email}@")
+      @user.update_attribute(:name, "#{@user.name}@")
+      @user.update_attribute(:email, "#{@user.email}@")
       flash[:warning] = "退会処理が正常に完了しました"
       redirect_to admin_users_path
     end

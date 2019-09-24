@@ -57,6 +57,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.is_quit = true
     if @user.save
+      @user.update_attribute(:name, "#{@user.name}@")
+      @user.update_attribute(:email, "#{@user.email}@")
       flash[:warning] = "退会処理が正常に完了しました"
       redirect_to root_url
     end
