@@ -27,7 +27,7 @@ RSpec.describe Post, type: :model do
     end
     context "content" do
       it "is invalid with empty content" do
-        @post.update(content = " " * 2)
+        @post.update(content: " " * 2)
         expect(@post.errors[:content]).to include("本文を入力してください")
       end
       it "is invalid with over maximum content length" do
