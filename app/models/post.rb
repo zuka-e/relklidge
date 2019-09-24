@@ -16,7 +16,7 @@ class Post < ApplicationRecord
     uniqueness: { case_sensitive: false, message: "このタイトルは既に使用されています" }
   validates :content,
     presence: { message: "本文を入力してください" },
-    length: { minimum: 2, maximum: 2000,  message: "本文は1文字以上、2000文字以内で入力してください" }
+    length: { minimum: 2, maximum: 2000,  message: "本文は2文字以上、2000文字以内で入力してください" }
 
   def liked_by?(user)
     self.likes.exists?(user_id: user.id)
