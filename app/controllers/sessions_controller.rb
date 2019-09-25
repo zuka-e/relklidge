@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user
       redirect_to session[:forwarding_url] || user
+      session[:forwarding_url] = nil
     else
       flash.now[:danger] = "メールアドレスかパスワードが正しくありません"
       render 'new'

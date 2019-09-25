@@ -26,8 +26,10 @@ class Admin::UsersController < ApplicationController
       @user.update_attribute(:name, "#{@user.name}@")
       @user.update_attribute(:email, "#{@user.email}@")
       flash[:warning] = "退会処理が正常に完了しました"
-      redirect_to admin_users_path
+      redirect_to admin_users_url
+    else
+      flash[:danger] = "退会処理にエラーが発生しました"
+      render 'withdrawal'
     end
-  end
 
 end

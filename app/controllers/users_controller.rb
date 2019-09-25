@@ -38,6 +38,7 @@ class UsersController < ApplicationController
         flash[:success] = "登録情報を更新しました"
         redirect_to @user
       else
+        flash[:danger] = "パスワードが一致しません"
         render 'edit'
       end
     else
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
   end
 
   def withdrawal
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
   end
   def quit
     @user = User.find(params[:id])
@@ -60,7 +61,12 @@ class UsersController < ApplicationController
       @user.update_attribute(:name, "#{@user.name}@")
       @user.update_attribute(:email, "#{@user.email}@")
       flash[:warning] = "退会処理が正常に完了しました"
+      session.delete(:user_id)
+      @current_user = nil
       redirect_to root_url
+    else
+      flash[:danger] = "退会処理にエラーが発生しました"
+      render 'withdrawal'
     end
   end
 
@@ -79,10 +85,10 @@ class UsersController < ApplicationController
       end
     end
     def authenticate_user
-      @user = User.find_by(params[:id])
+      @user = User.find_by(id: params[:id])
       unless @user == current_user
         flash[:danger] = "不正なアクセスです"
-        redirect_back(fallback_location: current_user)
+        redirect_to root_url
       end
     end
 

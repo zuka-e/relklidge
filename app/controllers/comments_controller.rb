@@ -59,10 +59,10 @@ class CommentsController < ApplicationController
     end
   end
   def authenticate_user
-    @user = User.find_by(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
     unless @user == current_user
       flash[:danger] = "不正なアクセスです"
-      redirect_back(fallback_location: current_user)
+      redirect_to root_url
     end
   end
 

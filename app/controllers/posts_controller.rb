@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 
-  before_action :log_in_request, only: [:create, :edit, :update, :destroy]
+  before_action :log_in_request, only: [:new, :create, :edit, :update, :destroy]
   before_action :authenticate_user, only: [:create, :edit, :update, :destroy]
 
   def index
@@ -37,7 +37,11 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = params[:user_id].to_i == current_user.id ? Post.unlimited.find_by(id: params[:id]) : Post.find_by(id: params[:id])
+    if log_in? && params[:user_id].to_i == current_user.id
+      @post = Post.unlimited.find_by(id: params[:id])
+    else
+      @post = Post.find_by(id: params[:id])
+    end
     redirect_back(fallback_location: root_url) if @post.nil?
     @comment = Comment.new
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
@@ -92,10 +96,10 @@ class PostsController < ApplicationController
       end
     end
     def authenticate_user
-      @user = User.find_by(params[:user_id])
+      @user = User.find_by(id: params[:user_id])
       unless @user == current_user
         flash[:danger] = "不正なアクセスです"
-        redirect_back(fallback_location: current_user)
+        redirect_to root_url
       end
     end
 end
