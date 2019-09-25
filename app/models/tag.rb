@@ -5,8 +5,8 @@ class Tag < ApplicationRecord
   has_many :users, through: :favorite_tags
   has_many :item_tags
   has_many :items, through: :item_tags
-  default_scope -> { where.not(name: "削除済タグ") }
-  scope :unlimited , ->{ unscope(where: :name) } # Tag.unlimitedで解除
+  # default_scope -> { where.not(name: "削除済タグ") }
+  # scope :unlimited , ->{ unscope(where: :name) } # Tag.unlimitedで解除
 
   validates :name,
     presence: { message: "タグ名を入力してください" },
