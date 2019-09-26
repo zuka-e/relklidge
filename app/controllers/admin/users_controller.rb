@@ -12,7 +12,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
     @user_posts = @user.posts.page(params[:page])
     @liked_posts = @user.liked_posts.page(params[:page])
-    @commented_posts = @user.commented_posts.group(:post_id).page(params[:page])
+    @commented_posts = @user.commented_posts.group(:id).page(params[:page])
     # ランダムに選んだお気に入りタグの投稿をおすすめとする
     number = (0...@user.tags.count).to_a.sample
     @recommended_posts =  @user.tags[number].posts.page(params[:page]) unless number.blank?
