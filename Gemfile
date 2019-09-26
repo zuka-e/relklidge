@@ -84,7 +84,7 @@ gem 'kaminari','~> 1.1.1'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 
-gem 'bootstrap-sass',          '3.3.7'
+gem "bootstrap-sass", ">= 3.4.1"
 gem 'jquery-rails',            '4.3.1'
 
 gem 'cocoon'
