@@ -31,5 +31,6 @@ class Admin::UsersController < ApplicationController
       flash[:danger] = "退会処理にエラーが発生しました"
       render 'withdrawal'
     end
+  end
 
 end
