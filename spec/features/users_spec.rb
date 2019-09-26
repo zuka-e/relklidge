@@ -57,6 +57,10 @@ RSpec.feature "Users", type: :feature do
   describe 'is_quit' do
     it "have login constraint after quit" do
       visit withdrawal_path(@user) # ユーザ退会
+      expect(page).to have_selector('.alert-danger', text: 'ログインが必要です')
+      fill_in "メールアドレス", with: "user@test.jp"
+      fill_in "パスワード", with: "password"
+      click_button "ログイン"
       click_link '退会する'
       expect(User.first.is_quit).to eq("退会済")
       visit user_path(@user) # ログアウトされたことを確認
