@@ -1,5 +1,10 @@
-html body {
+html {
+  height: 100%;
+}
+body {
   background-color: snow;
+  position: relative;
+  min-height: 100%;
 }
 nav.navbar {
   border-radius: unset;
@@ -7,11 +12,13 @@ nav.navbar {
 .container {
   padding-bottom: 100px;
 }
-footer nav.navbar {
-  margin-bottom: 0px;
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
+  nav.navbar {
+    margin-bottom: 0px;
+  }
 }
 .clearfix::after {
   content: "";
