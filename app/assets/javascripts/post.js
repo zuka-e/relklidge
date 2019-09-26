@@ -81,7 +81,7 @@ $(document).on("turbolinks:load", function() {
   // 文字数カウント
   $(document).on("keyup mouseover", "#post_content", function() {
     var num = $(this).val().length;
-    $("#count_str").text(`${num}文字`);
+    $("#count_str").text(num + "文字");
   });
   // 不可
   // $("#post_content").on("keyup", function() {
