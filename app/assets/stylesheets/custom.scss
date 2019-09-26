@@ -1,8 +1,17 @@
 html body {
   background-color: snow;
 }
+nav.navbar {
+  border-radius: unset;
+}
 .container {
   padding-bottom: 100px;
+}
+footer nav.navbar {
+  margin-bottom: 0px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 .clearfix::after {
   content: "";
