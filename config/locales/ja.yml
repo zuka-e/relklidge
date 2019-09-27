@@ -1,0 +1,24 @@
+ja:
+  activerecord:
+    attributes:
+      admin:
+        name: 管理者名
+        email: メールアドレス
+      user:
+        name: ユーザ名
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: 確認用パスワード
+      post:
+        title: タイトル
+        content: 本文
+      comment:
+        content: 本文
+      tag:
+        name: タグ名
+      category:
+        name: 分類名
+      section:
+        name: 区分名
+      item:
+        name: 項目名
