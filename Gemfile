@@ -40,6 +40,7 @@ group :production do
   gem 'pg'
   gem 'therubyracer'
   gem 'rails_12factor'
+  gem 'refile-s3'
 end
 
 group :development, :test do
