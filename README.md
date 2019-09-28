@@ -1,24 +1,12 @@
-# README
+# Relklidge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 概要
+- 民法に関する解説文、論文の投稿ができるまとめサイトです。
+  - 投稿は非公開にすることも可能なので気軽に記述していただけます。
+- 投稿にはタブが付与でき、自身のお気に入りタグも簡単に登録できます。
+  - 関連する情報をタブで結びつけることが可能です。  
+- 他の利用者の公開されている投稿については、閲覧、評価(お気に入り登録)、また、コメントを書くことができます。  
+- サイトの閲覧は登録不要でご利用いただけますが、解説文の投稿、また、他の利用者の投稿を評価、コメントをする際には登録が必要となります。  
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## リンク
+- <a href='https://relklidge.herokuapp.com'>Relklidge</a>
