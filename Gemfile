@@ -45,6 +45,7 @@ end
 
 group :development, :test do
   gem 'pry-byebug' # for debugging
+  gem 'pry-rails' # for pry console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]  # call 'byebug' anywhere in the code
   gem 'rspec-rails' # for using rspec
   gem 'factory_bot_rails' # for generating test data
