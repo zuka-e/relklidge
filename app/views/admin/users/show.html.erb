@@ -16,10 +16,10 @@
       </div>
       <%= link_to '退会させる', admin_admin_quit_path(@user),
         method: :patch, data: { confirm: "本当に退会させますか？" },
-        class: "btn btn-danger btn-block" %>
+        class: "btn btn-danger btn-block", style: "margin-bottom: 30px;" %>
     </aside>
   </div>
-  <div class="col-sm-6 col-xs-12 index">
+  <div class="col-sm-6 hidden-xs index">
     <ul id="posts-tab" class="nav nav-tabs">
       <li class="active"><a href="#user-posts" data-toggle="tab">ユーザ投稿</a></li>
       <li><a href="#liked-posts" data-toggle="tab">いいねした投稿</a></li>
@@ -45,9 +45,6 @@
     <aside>
       <ul class="list-group">
         <li class="list-group-item list-header">お気に入りタグ</li>
-        <li class="list-group-item middle-item">
-          <%= link_to 'タグ一覧を見る', tags_path, class: "btn btn-info btn-block" %>
-        </li>
         <% @favorite_tags.each do |tag| %>
           <%= link_to posts_path( tag: tag.name ) do %>
             <li class="list-group-item middle-item">
@@ -59,5 +56,4 @@
       </ul>
     </aside>
   </div>
-
 </div>

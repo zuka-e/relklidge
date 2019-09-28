@@ -5,18 +5,18 @@
     <h1>メニュー</h1>
       <div class="select-actions">
         <%= link_to '新規投稿', new_admin_post_path, class: "btn btn-success left-btn" %>
-        <%= link_to '新規登録', new_admin_category_path, class: "btn btn-success right-btn" %>
+        <%= link_to '分類登録', new_admin_category_path, class: "btn btn-success right-btn" %>
       </div>
       <div class="select-actions">
         <%= link_to '投稿一覧', admin_posts_path, class: "btn btn-info left-btn" %>
         <%= link_to '分類一覧', admin_categories_path, class: "btn btn-info right-btn" %>
       </div>
       <div class="select-actions">
-        <%= link_to 'ユーザ一覧', admin_users_path, class: "btn btn-info left-btn" %>
-        <%= link_to 'タグ一覧', admin_tags_path, class: "btn btn-info right-btn" %>
+        <%= link_to 'ユーザ', admin_users_path, class: "btn btn-info left-btn" %>
+        <%= link_to 'タグ', admin_tags_path, class: "btn btn-info right-btn" %>
       </div>
       <div class="select-actions">
-        <%= link_to 'コメント一覧', admin_comments_path, class: "btn btn-info left-btn" %>
+        <%= link_to 'コメント', admin_comments_path, class: "btn btn-info left-btn" %>
         <%= link_to 'ログアウト', admin_logout_path, class: "btn btn-warning right-btn" %>
       </div>
     </article>

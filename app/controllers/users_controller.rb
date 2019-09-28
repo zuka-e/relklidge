@@ -18,12 +18,12 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
-    @user_posts = @user.posts.unlimited.page(params[:page])
-    @liked_posts = @user.liked_posts.page(params[:page])
-    @commented_posts = @user.commented_posts.group(:id).page(params[:page])
+    @user_posts = @user.posts.unlimited.page(params[:page]).per(10)
+    @liked_posts = @user.liked_posts.page(params[:page]).per(10)
+    @commented_posts = @user.commented_posts.group(:id).page(params[:page]).per(10)
     # ランダムに選んだお気に入りタグの投稿をおすすめとする
     number = (0...@user.tags.count).to_a.sample
-    @recommended_posts =  @user.tags[number].posts.page(params[:page]) unless number.blank?
+    @recommended_posts =  @user.tags[number].posts.page(params[:page]).per(10) unless number.blank?
     @favorite_tags = @user.tags.uniq
   end
 

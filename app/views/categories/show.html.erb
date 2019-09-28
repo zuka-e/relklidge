@@ -1,6 +1,6 @@
 <% provide(:title, @category.name)%>
 <div class="basic-page row">
-  <div class="col-sm-3 col-xs-0 side-bar">
+  <div class="col-sm-3 hidden-xs side-bar">
     <aside>
       <%= render  partial: 'shared/side_bar', locals: { sections: @sections } %>
     </aside>
@@ -11,8 +11,11 @@
         <h1><%= @category.name %></h1>
         <p><%= @category.content %></p>
       </section>
+      <aside class="visible-xs" style="margin-top: 20px;">
+        <%= render  partial: 'shared/side_bar', locals: { sections: @sections } %>
+      </aside>
     </article>
-    <article>
+    <article class="hidden-xs">
       <%= render partial: 'posts/posts', locals: { posts: @posts, title: "関連投稿" } %>
     </article>
   </div>

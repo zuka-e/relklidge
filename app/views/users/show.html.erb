@@ -1,7 +1,7 @@
 <% provide(:title, "@#{ @user.name }")%>
 <div class="basic-page row">
   <div class="col-sm-3 col-xs-0 side-bar">
-    <aside>
+    <aside >
       <div class="profile">
         <%= attachment_image_tag @user,
         :image, :fill, 150, 150, format: 'jpg',
@@ -14,10 +14,25 @@
           <tbody><tr><td><%= @user.email %></td></tr></tbody>
         </table>
       </div>
-      <%= link_to 'ユーザ情報編集', edit_user_path(current_user), class: "btn btn-info btn-block" %>
+      <%= link_to 'ユーザ情報編集', edit_user_path(current_user),
+        class: "btn btn-info btn-block", style: "margin-bottom: 30px;" %>
+      <ul class="list-group vertical-group">
+        <li class="list-group-item list-header">お気に入りタグ</li>
+        <li class="list-group-item middle-item">
+          <%= link_to 'タグ一覧を見る', tags_path, class: "btn btn-info btn-block" %>
+        </li>
+        <% @favorite_tags.each do |tag| %>
+          <%= link_to posts_path( tag: tag.name ) do %>
+            <li class="list-group-item middle-item">
+              <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
+            </li>
+          <% end %>
+        <% end %>
+        <li class="list-group-item last-item"></li>
+      </ul>
     </aside>
   </div>
-  <div class="col-sm-6 col-xs-12 index">
+  <div class="col-sm-9 hidden-xs index">
     <ul id="posts-tab" class="nav nav-tabs">
       <li class="active"><a href="#user-posts" data-toggle="tab">マイ投稿</a></li>
       <li><a href="#liked-posts" data-toggle="tab">いいねした投稿</a></li>
@@ -47,23 +62,31 @@
       </div>
     </div>
   </div>
-  <div class="col-sm-3 col-xs-0 side-bar">
-    <aside>
-      <ul class="list-group">
-        <li class="list-group-item list-header">お気に入りタグ</li>
-        <li class="list-group-item middle-item">
-          <%= link_to 'タグ一覧を見る', tags_path, class: "btn btn-info btn-block" %>
-        </li>
-        <% @favorite_tags.each do |tag| %>
-          <%= link_to posts_path( tag: tag.name ) do %>
-            <li class="list-group-item middle-item">
-              <%= tag.name %><span class="badge"><%= tag.posts.count %></span>
-            </li>
-          <% end %>
-        <% end %>
-        <li class="list-group-item last-item"></li>
-      </ul>
-    </aside>
-  </div>
 
+  <aside class="visible-xs myposts" style="margin-top: 30px;" >
+    <section class="list-group vertical-group">
+      <% if !@user_posts.nil? %>
+          <li class="list-group-item list-header">マイ投稿</li>
+          <%= render partial: 'posts', locals: { posts: @user_posts } %>
+      <% end %>
+    </section>
+    <section class="list-group vertical-group">
+      <li class="list-group-item list-header">いいねした投稿</li>
+      <% if !@liked_posts.nil? %>
+        <%= render partial: 'posts', locals: { posts: @liked_posts } %>
+      <% end %>
+    </section>
+    <section class="list-group vertical-group">
+      <li class="list-group-item list-header">コメントした投稿</li>
+      <% if !@commented_posts.nil? %>
+        <%= render partial: 'posts', locals: { posts: @commented_posts } %>
+      <% end %>
+    </section>
+    <section class="list-group vertical-group">
+      <li class="list-group-item list-header">おすすめ投稿</li>
+      <% if !@recommended_posts.nil? %>
+        <%= render partial: 'posts', locals: { posts: @recommended_posts} %>
+      <% end %>
+    </section>
+  </aside>
 </div>

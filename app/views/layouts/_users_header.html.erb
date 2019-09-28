@@ -10,14 +10,14 @@
       <%= link_to 'Relklidge', root_path, id:"logo" %>
     </div>
     <div class="collapse navbar-collapse basic-nav" id="navbarEexample7">
-      <% if log_in? %>
         <ul class="nav navbar-nav">
           <li><%= link_to '分類一覧', categories_path, class: "glyphicon glyphicon-list" %></li>
-          <li><%= link_to '新規投稿', new_post_path, class: "glyphicon glyphicon-pencil" %></li>
+          <% if log_in? %>
+            <li><%= link_to '新規投稿', new_post_path, class: "glyphicon glyphicon-pencil" %></li>
+          <% end %>
           <li><%= link_to '投稿一覧', posts_path, class: "glyphicon glyphicon-file" %></li>
           <li><%= link_to 'タグ一覧', tags_path, class: "glyphicon glyphicon-tags" %></li>
         </ul>
-      <% end %>
       <ul class="nav navbar-nav navbar-right">
         <% if log_in? %>
           <li><%= link_to 'マイページ',user_path(current_user),class:"glyphicon glyphicon-user";%></li>
@@ -26,6 +26,8 @@
           <li><%= link_to '新規登録', signup_path,class:"glyphicon glyphicon-star";%></li>
           <li><%= link_to 'ログイン',login_path,class:"glyphicon glyphicon-log-in";%></li>
         <% end %>
+        <li class="visible-xs"><%= link_to "Relklidgeとは",about_path, class: "glyphicon glyphicon-info-sign" %></li>
+        <li class="visible-xs"><%= link_to "ヘルプ", help_path, class: "glyphicon glyphicon-question-sign" %></li>
       </ul>
     </div>
   </div>

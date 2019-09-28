@@ -4,7 +4,7 @@
     <article class="article-box">
       <h1>管理者ログイン</h1>
       <%= form_for(:session, url: admin_login_path) do |f| %>
-        <p class="alert alert-info">空欄を全てご記入の上、ログインボタンを押してください。</p>
+        <p class="alert alert-info">空欄を全てご記入ください。</p>
         <div class="field">
           <%= f.label :email, "メールアドレス" %>
           <%= f.email_field :email, autofocus: true, autocomplete: "email",

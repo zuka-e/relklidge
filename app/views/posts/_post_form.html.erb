@@ -12,14 +12,12 @@
     </div>
     <div class="field">
       <%= f.label :title, 'タイトル' %>
-      <%= f.text_field :title, placeholder: "タイトルは1文字以上、30文字以内で入力してください", class: 'form-control' %>
-    </div>
-    <div class="field">
-      <%= text_field_tag "tag[name]", "", placeholder: 'タグ名は1文字以上、10文字以内で入力してください', class: 'form-control' %>
+      <%= f.text_field :title, placeholder: "タイトル( 1〜30文字 )", class: 'form-control' %>
+      <%= text_field_tag "tag[name]", "", placeholder: 'タグ名( 1〜10文字 )', class: 'form-control' %>
     </div>
     <div class="field">
       <%= f.label :content, '本文' %><span id="count_str">0文字</span>
-      <%= f.text_area :content, placeholder: "本文は1文字以上、2000文字以内で入力してください", class: 'form-control' %>
+      <%= f.text_area :content, placeholder: "本文( 1〜2000文字 )", class: 'form-control' %>
     </div>
 
     <div class="field">

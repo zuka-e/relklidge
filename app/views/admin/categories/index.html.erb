@@ -10,7 +10,7 @@
           <%= attachment_image_tag category, :image, :fill, 300, 250, format: 'jpg', fallback: "/no_image.jpg", size:'300x250'%>
           <h2><%= category.name %></h2>
         <% end %>
-        <%= link_to '編集', edit_admin_category_path(category.id), class: "btn btn-info" %>
+        <%= link_to '編集', edit_admin_category_path(category.id), class: "btn btn-info btn-block" %>
       </div>
     <% end %>
     </div>

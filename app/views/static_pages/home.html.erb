@@ -1,17 +1,20 @@
 <% provide(:title, '')%>
 <div class="basic-page row">
-  <div class="col-sm-3 col-xs-0 side-bar">
+  <div class="col-md-3 col-sm-3 hidden-xs side-bar">
     <aside>
       <%= render partial: 'shared/category_side_bar', locals: { categories: @categories } %>
       <%= render 'shared/tag_side_bar' %>
     </aside>
   </div>
-  <div class="col-sm-6 col-xs-12 index">
+  <div class="col-md-6 col-sm-9 col-xs-12 index">
     <article>
       <%= render partial: 'posts/posts', locals: { posts: @posts, title: "最近の投稿" } %>
     </article>
+    <aside class="visible-xs" style="margin-top: 30px;" >
+      <%= render 'shared/tag_side_bar' %>
+    </aside>
   </div>
-  <div class="col-sm-3 col-xs-12 index">
+  <div class="col-md-3 hidden-sm hidden-xs index">
     <aside>
         <ul class="list-group vertical-group">
           <li class="list-group-item list-header">MENU</li>
