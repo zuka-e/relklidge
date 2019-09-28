@@ -1,6 +1,7 @@
 <article class="article-box">
   <%= form_for([current_user, @post]) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+    <p>※一度公開後いいねが付き、ランキングに載った場合、完全な非公開とはなりません。</p>
     <%= f.check_box :is_open %>
     <%= f.label :is_open, "公開する" %>
     <div class="field">

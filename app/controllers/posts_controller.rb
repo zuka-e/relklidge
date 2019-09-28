@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     @categories = Category.all
     # group 重複まとめ, Arel.sql() 対injection, count() postの多い順(order用), pluck post_idのみ出力
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
-    @popular_tags = Tag.where(id: ranked_tag_ids)
+    @popular_tags = Tag.find(ranked_tag_ids)
   end
 
   def new
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     redirect_back(fallback_location: root_url) if @post.nil?
     @comment = Comment.new
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
-    @popular_tags = Tag.where(id: ranked_tag_ids)
+    @popular_tags = Tag.find(ranked_tag_ids)
   end
   def edit
     @post = Post.unlimited.find_by(id: params[:id], user: current_user)
