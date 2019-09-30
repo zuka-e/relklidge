@@ -19,39 +19,14 @@ categories = %w["民法","最終更新： 令和元年六月十四日公布（�
 Category.create!(name:"民法", content: "最終更新： 令和元年六月十四日公布（令和元年法律第三十四号）改正")
 
 # 区分を生成
-# sections1 = %w[基本的人権 平和主義 国民主権]
 sections = %w[総則 物権 債権 相続]
-# sections = [sections1, sections2]
-categories.count.times do |index|
-  sections.each do |w|
-    Section.create!(
-      category_id: 1,
-      name: w
-    )
-  end
-end
+sections.each { Section.create!(category_id: 1, name: w) }
 
 # 項目を生成
 require "csv"
 CSV.foreach("db/items.csv", headers: true) do |row|
   Item.create!(id: row['id'], section_id: row['section_id'], name: row['name'], content: row['content'])
 end
-
-# items1_1 = %w[生存権 社会権 参政権]
-# items1_2 = %w[戦争の放棄]
-# items1_3 = %w[国会 内閣 最高裁判所]
-# items2_1 = %w[権利能力 法人 制限行為能力者]
-# items2_2 = %w[不動産と動産 取得時効 抵当権]
-# items2_3 = %w[保証債務 連帯債務 弁済]
-# items2_4 = %w[婚姻 養子 相続]
-# items = [items1_1, items1_2, items1_3, items2_1 ,items2_2, items2_3, items2_4]
-# i = 0
-# categories.count.times do |index|
-#   sections[index].count.times do
-#     items[i].each { |w| Item.create!(section_id: i + 1, name: w) }
-#     i += 1
-#   end
-# end
 
 # ユーザを生成
 User.create!( name: 'Relklidge', email: 'user@test.jp', password: 'password', password_confirmation: 'password')

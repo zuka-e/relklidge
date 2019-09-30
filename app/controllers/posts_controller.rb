@@ -42,7 +42,10 @@ class PostsController < ApplicationController
     else
       @post = Post.find_by(id: params[:id], user_id: params[:user_id])
     end
-    redirect_back(fallback_location: root_url) if @post.nil?
+    if @post.nil?
+      flash[:worning] = 'この投稿は現在非公開に設定されています'
+      redirect_back(fallback_location: root_url)
+    end
     @comment = Comment.new
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
     @popular_tags = Tag.find(ranked_tag_ids)

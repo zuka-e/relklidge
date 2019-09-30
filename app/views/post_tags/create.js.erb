@@ -1,4 +1,4 @@
-$(`#tag-<%= @tag.id %>`).html("<%= escape_javascript(render(
+$(`#tag-<%= @post_tag.id %>`).html("<%= escape_javascript(render(
     partial: 'post_tags/post_tags',
-    locals: { post: @post , tag: @tag }
+    locals: { post: @post , tag: @post_tag }
   ))%>");
