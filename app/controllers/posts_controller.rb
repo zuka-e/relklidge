@@ -56,7 +56,7 @@ class PostsController < ApplicationController
     end
   end
   def update
-    @post = Post.unlimited.find_by(params[:id], user: current_user)
+    @post = Post.unlimited.find_by(id: params[:id], user: current_user)
     params[:post][:is_open] == '1' ? @post.is_open = true : @post.is_open = false
     if @post.update(post_params)
       @post.post_tags.create(tag: Tag.create(tag_params))
