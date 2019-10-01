@@ -44,7 +44,7 @@ class PostsController < ApplicationController
       @post = Post.find_by(id: params[:id], user_id: params[:user_id])
     end
     if @post.nil?
-      flash[:worning] = 'この投稿は現在非公開に設定されています'
+      flash[:warning] = 'この投稿は現在非公開に設定されています'
       redirect_back(fallback_location: root_url)
     end
     @comment = Comment.new
