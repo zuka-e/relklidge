@@ -3,6 +3,13 @@ module SessionsHelper
   def current_user
     if session[:user_id] # find_by -> x例外=>nil
       @current_user ||= User.find_by(id: session[:user_id])
+    elsif cookies.signed[:user_id] # .signed -> 復号
+      user = User.find_by(id: cookies.signed[:user_id])
+      return false if remember_digest.nil? # 別ブラウザ用エラー防止
+      if user && BCrypt::Password.new(user.remember_digest).is_password?(cookies[:remember_token])
+        log_in user # ログアウトの逆
+        @current_user = user # remember_digest存在 -> ログアウト不可を確認
+      end
     end
   end
   def log_in(user)
