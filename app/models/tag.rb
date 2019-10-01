@@ -9,7 +9,6 @@ class Tag < ApplicationRecord
   # scope :unlimited , ->{ unscope(where: :name) } # Tag.unlimitedで解除
 
   validates :name,
-    presence: { message: "タグ名を入力してください" },
     length: { minimum: 1, maximum: 10,  message: "タグ名は1文字以上、10文字以内で入力してください" },
     uniqueness: { case_sensitive: false, message: "このタグ名は既に使用されています" }
 

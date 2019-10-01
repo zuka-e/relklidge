@@ -1,0 +1,4 @@
+$("#post-form").html("<%= escape_javascript(render(
+  partial: 'post_form',
+  locals: { post: @post }
+))%>");

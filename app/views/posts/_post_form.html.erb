@@ -1,7 +1,10 @@
 <article class="article-box">
-  <%= form_for([current_user, @post]) do |f| %>
+  <%= form_for([current_user, post], remote: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <p>※一度公開後いいねが付き、ランキングに載った場合、完全な非公開とはなりません。</p>
+    <div id="info-msg">
+      <p class="alert alert-info">作成後にタグが選択できます</p>
+    </div>
+    <p>※ 一度公開すると、いいねランキングに載った場合、非公開に設定しても一部は公開されます。</p>
     <%= f.check_box :is_open %>
     <%= f.label :is_open, "公開する" %>
     <div class="field">
@@ -13,26 +16,26 @@
     </div>
     <div class="field">
       <%= f.label :title, 'タイトル' %>
-      <%= f.text_field :title, placeholder: "タイトル( 1〜30文字 )", class: 'form-control' %>
+      <%= f.text_field :title, placeholder: "タイトル( 〜30文字 )", class: 'form-control' %>
       <%= text_field_tag "tag[name]", "", placeholder: 'タグ名( 1〜10文字 )', class: 'form-control' %>
     </div>
     <div class="field">
       <%= f.label :content, '本文' %><span id="count_str">0文字</span>
-      <%= f.text_area :content, placeholder: "本文( 1〜2000文字 )", class: 'form-control' %>
+      <%= f.text_area :content, placeholder: "本文( 〜2000文字 )", class: 'form-control' %>
     </div>
 
     <div class="field">
       <div class="select-actions">
-        <%= f.submit '投稿', data: { confirm: '保存します' }, class: "btn btn-success left-btn" %>
-        <%= link_to '戻る', request.referrer, data: { confirm: '編集内容は破棄されます' }, class: "btn btn-danger right-btn" %>
+        <%= f.submit '保存', data: { confirm: '保存します' }, class: "btn btn-success left-btn" %>
+        <%= link_to '戻る', current_user, data: { confirm: '編集内容は破棄されます' }, class: "btn btn-danger right-btn" %>
       </div>
     </div>
   <% end %>
-  <% unless @post.id.nil? %>
+  <% unless post.id.nil? %>
     <div class="tag-index">
-      <% @tags.each do |tag| %>
+      <% tags.each do |tag| %>
         <div class="char-area" id="tag-<%= tag.id %>">
-          <%= render partial: 'post_tags/post_tags', locals: { post: @post , tag: tag } %>
+          <%= render partial: 'post_tags/post_tags', locals: { post: post , tag: tag } %>
         </div>
       <% end %>
     </div>

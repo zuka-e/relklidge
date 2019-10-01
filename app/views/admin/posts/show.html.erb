@@ -9,7 +9,7 @@
     <article class="article-box">
       <section>
         <div id="display-post">
-          <%= render partial: 'posts/display_post', locals: { creator: User.first } %>
+          <%= render partial: 'posts/display_post', locals: { creator: User.first, post: @post } %>
         </div>
       </section>
       <div class="comments">
