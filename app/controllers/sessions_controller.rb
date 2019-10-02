@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password]) # password認証
-      if user.id_activated? == true # (== true は省略可) メール認証
+      if user.is_activated? == true # (== true は省略可) メール認証
         log_in user
         # cookiesを生成
         if params[:session][:remember_me] == '1' # checkboxはsessionハッシュに内包
