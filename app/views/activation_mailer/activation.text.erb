@@ -1,0 +1,5 @@
+Relklidge
+ようこそ <%= @user.name %>さん
+まだ登録は完了していません。
+こちらにアクセスしてアカウントを有効化してください
+<%= edit_activation_url(@user.activation_token, email: @user.email) %>

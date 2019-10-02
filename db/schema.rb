@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_01_101052) do
+ActiveRecord::Schema.define(version: 2019_10_01_155333) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name", null: false
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(version: 2019_10_01_101052) do
     t.string "remenber_digest"
     t.string "string"
     t.string "remember_digest"
+    t.string "activation_digest"
+    t.boolean "is_activated", default: false
   end
 
 end

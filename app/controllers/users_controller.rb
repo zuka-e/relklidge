@@ -8,10 +8,12 @@ class UsersController < ApplicationController
   end
   def create
     @user = User.new(user_params)
+    @user.activation_token = SecureRandom.urlsafe_base64 # ランダムな文字列生成
+    @user.update_attribute(:activation_digest, User.digest(@user.activation_token))
     if @user.save
-      log_in @user
-      flash[:success] = "登録が完了しました"
-      redirect_to @user
+      ActivationMailer.activation(@user).deliver_now
+      flash[:info] = '仮登録が完了しました、メールをご確認ください'
+      redirect_to root_url
     else
       render 'new'
     end

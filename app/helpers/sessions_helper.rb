@@ -7,7 +7,7 @@ module SessionsHelper
       user = User.find_by(id: cookies.signed[:user_id])
       return false if remember_digest.nil? # 別ブラウザ用エラー防止
       if user && BCrypt::Password.new(user.remember_digest).is_password?(cookies[:remember_token])
-        log_in user # ログアウトの逆
+        log_in user # ブラウザにcookiesあれば常にログイン状態
         @current_user = user # remember_digest存在 -> ログアウト不可を確認
       end
     end

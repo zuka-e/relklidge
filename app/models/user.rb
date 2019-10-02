@@ -1,6 +1,7 @@
 class User < ApplicationRecord
-  # クラス属性(読: User.remenber_token, 書: User.remenber_token = )を定義
-
+  # クラス属性を定義
+  # user#createで所持させ,有効化メールに添付 [複数箇所で利用] -> userの属性とすることで値を維持
+  attr_accessor :activation_token
   has_secure_password
   attachment :image
   has_many :posts, dependent: :destroy
