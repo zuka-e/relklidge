@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :favorite_tags, only: [:create, :destroy]
   resources :post_tags, only: [:create, :destroy]
   resources :item_tags, only: [:create, :destroy]
+  resources :activations, only: [:edit]
 
   namespace :admin do
     root                'sessions#home'

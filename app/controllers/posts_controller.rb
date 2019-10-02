@@ -12,7 +12,6 @@ class PostsController < ApplicationController
       @posts = Post.page(params[:page])
     end
     @categories = Category.all
-    # group 重複まとめ, Arel.sql() 対injection, count() postの多い順(order用), pluck post_idのみ出力
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
     @popular_tags = Tag.find(ranked_tag_ids)
   end
@@ -20,19 +19,21 @@ class PostsController < ApplicationController
   def new
     @post = Post.new
     @tag = Tag.new
-    @tags = Tag.page(params[:page])
   end
   def create
     @post = Post.new(post_params)
     @post.user = current_user
     params[:post][:is_open] == '1' ? @post.is_open = true : @post.is_open = false
-    if @post.save
-      @post.post_tags.create(tag: Tag.create(tag_params))
-      flash[:success] = '投稿が作成されました'
-      redirect_to [@post.user, @post]
-    else
-      @tags = Tag.page(params[:page])
-      render 'new'
+    respond_to do |format|
+      if @post.save
+        @post.post_tags.create(tag: Tag.create(tag_params))
+        @tags = Tag.page(params[:page])
+        format.html { redirect_to [@post.user, @post] }
+        format.js { render 'show'}
+      else
+        format.html { render 'new' }
+        format.js { render 'new'}
+      end
     end
   end
 
@@ -43,13 +44,14 @@ class PostsController < ApplicationController
       @post = Post.find_by(id: params[:id], user_id: params[:user_id])
     end
     if @post.nil?
-      flash[:worning] = 'この投稿は現在非公開に設定されています'
+      flash[:warning] = 'この投稿は現在非公開に設定されています'
       redirect_back(fallback_location: root_url)
     end
     @comment = Comment.new
     ranked_tag_ids = PostTag.group(:tag_id).order( Arel.sql("count(tag_id) DESC")).limit(10).pluck(:tag_id)
     @popular_tags = Tag.find(ranked_tag_ids)
   end
+
   def edit
     @post = Post.unlimited.find_by(id: params[:id], user: current_user)
     @tags = Tag.page(params[:page])
@@ -58,19 +60,20 @@ class PostsController < ApplicationController
       format.js
     end
   end
+
   def update
     @post = Post.unlimited.find_by(id: params[:id], user: current_user)
     params[:post][:is_open] == '1' ? @post.is_open = true : @post.is_open = false
-    if @post.update(post_params)
-      @post.post_tags.create(tag: Tag.create(tag_params))
-      flash[:success] = '変更が保存されました'
-      respond_to do |format|
-        format.html { redirect_back(fallback_location: params[:stored_url]) }
-        format.js { render 'show'}
+    respond_to do |format|
+      @tags = Tag.page(params[:page])
+      if @post.update(post_params)
+        @post.post_tags.create(tag: Tag.create(tag_params))
+        format.html { redirect_to [@post.user, @post] }
+        format.js
+      else
+        format.html { render 'edit'}
+        format.js { render 'edit'}
       end
-    else
-      flash.now[:danger] = '保存されていません'
-      redirect_back(fallback_location: params[:stored_url])
     end
   end
 

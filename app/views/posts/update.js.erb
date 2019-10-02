@@ -1,4 +1,9 @@
-$("#post-form").html("<%= escape_javascript(render('post_form.html.erb'))%>");
-$("#post-form")[0].scrollIntoView({behavior: "smooth"});
-$("#startTimer").prop("disabled", true);
-$("#resetTimer").prop("disabled", true);
+$("#post-form").html("<%= escape_javascript(content_tag(
+  :div,'投稿が保存されました', class: "alert alert-success")
+)%>");
+$("#display-post").html("<%= escape_javascript(render(
+  partial: 'display_post',
+  locals: { creator: @post.user, post: @post }
+))%>");
+$("#logo")[0].scrollIntoView({behavior: "smooth"});
+

@@ -1,0 +1,7 @@
+<h1>Relklidge</h1>
+<p>ようこそ <%= @user.name %> さん</p>
+<p>まだ登録は完了していません。</p>
+<%= link_to edit_activation_url(@user.activation_token, email: @user.email) do %>
+  <p>こちらをクリックしてアカウントを有効化してください</p>
+<% end %>
+

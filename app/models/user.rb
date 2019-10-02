@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # クラス属性を定義
+  # user#createで所持させ,有効化メールに添付 [複数箇所で利用] -> userの属性とすることで値を維持
+  attr_accessor :activation_token
   has_secure_password
   attachment :image
   has_many :posts, dependent: :destroy
@@ -23,5 +26,10 @@ class User < ApplicationRecord
     presence: { message: "パスワードを入力してください" },
     length: { minimum: 8, message: "パスワードは8文字以上で入力してください" },
     allow_nil: true
+
+  def User.digest(string) # 引数をハッシュ化
+    cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
+    BCrypt::Password.create(string, cost: cost)
+  end
 
 end

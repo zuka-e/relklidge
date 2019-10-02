@@ -1,1 +1,9 @@
-$("#display-post").html("<%= escape_javascript(render('display_post.html.erb'))%>");
+$("#post-form").html("<%= escape_javascript(render(
+  partial: 'post_form',
+  locals: { post: @post, tags: @tags }
+))%>");
+$("#info-msg").html("<%= escape_javascript(content_tag(
+  :div,'投稿が保存されました', class: "alert alert-success")
+)%>");
+$("#startTimer").prop("disabled", true);
+$("#resetTimer").prop("disabled", true);
