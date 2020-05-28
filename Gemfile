@@ -19,7 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.1.0', require: false # Reduces boot times through caching; required in config/boot.rb
 gem "bootstrap-sass",          '3.4.1'
 gem 'jquery-rails',            '4.3.1'
-gem 'kaminari','~> 1.1.1' # run rails g kaminari:config[views default] for setting
+gem 'kaminari','~> 1.2.1' # run rails g kaminari:config[views default] for setting
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick" # (Runtime error) config/ini./app._ctrl._renderer.rb
 gem 'cocoon' # for nested form
